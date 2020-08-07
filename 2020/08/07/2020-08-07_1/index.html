@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,9 +16,11 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive: 2020/8 - 世界的侧面</title>
+  <title>Github + Hexo 爬坑之旅【2】 —— 网站配置 - 世界的侧面</title>
   
 
+  
+    <meta name="description" content="前面已经将网站的基本架子搭好了，但通用的配置显然并不适用于每一个人，这里就通过配置文件稍微自定义一下。">
   
 
   <!-- feed -->
@@ -70,7 +70,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -262,10 +262,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">Github + Hexo 爬坑之旅【2】 —— 网站配置</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/08/07/2020-08-07_1/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -300,26 +300,11 @@
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -329,138 +314,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/08/07/2020-08-07_2/">
-      前端造轮子【1】 —— vue-router
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 7, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/07/2020-08-07_2/" class="leancloud_visitors" data-flag-title="前端造轮子【1】 —— vue-router">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/07/2020-08-07_2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/07/2020-08-07_2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天我们来研究一下 vue-router 的内部实现原理。</p>
-<p>我们知道，vue app 是 spa，是没有页面之间的跳转的，说的直白一点就是没有刷新。那么在不刷新页面的情况下，怎么实现一个项目中，不同页面，不同组件之间的切换展示呢？</p>
-<p>通过学习 vue-router 的源码，可以得知，浏览器为我们提供了两个方案：</p>
-<ul>
-<li>hash（就是页面上的 #）</li>
-<li>history（h5）</li>
-</ul>
-<p>今天我们就简单来实现一下通过 hash 的方式实现 vue 的路由跳转。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/07/2020-08-07_2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/08/07/2020-08-07_1/">
       Github + Hexo 爬坑之旅【2】 —— 网站配置
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -499,42 +357,6 @@
 
             
           
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/07/2020-08-07_1/" class="leancloud_visitors" data-flag-title="Github + Hexo 爬坑之旅【2】 —— 网站配置">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/07/2020-08-07_1/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/07/2020-08-07_1/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -544,157 +366,117 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面已经将网站的基本架子搭好了，但通用的配置显然并不适用于每一个人，这里就通过配置文件稍微自定义一下。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/07/2020-08-07_1/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>前面已经将网站的基本架子搭好了，但通用的配置显然并不适用于每一个人，这里就通过配置文件稍微自定义一下。</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+<h2 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h2><p>目标文件：root/ _config.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">世界的侧面</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">初心Yearth</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">https://s1.ax1x.com/2020/08/06/agXE9K.png</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><p>目标文件：root/themes/volantis/_config.yml</p>
+<h3 id="封面配置"><a href="#封面配置" class="headerlink" title="封面配置"></a>封面配置</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cover:</span></span><br><span class="line">    <span class="attr">M title:</span> <span class="string">&#x27;标题&#x27;</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># subtitle: &#x27;&#x27;</span></span><br><span class="line">    <span class="attr">M search:</span> <span class="string">你想看点什么呢？</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># features: // 这个选项是搜索框下的导航按钮，这里选择注释掉</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="导航栏配置"><a href="#导航栏配置" class="headerlink" title="导航栏配置"></a>导航栏配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">navbar:</span></span><br><span class="line">    <span class="attr">logo:</span></span><br><span class="line">        <span class="attr">img:</span></span><br><span class="line">        <span class="attr">icon:</span></span><br><span class="line">        <span class="attr">title:</span> <span class="string">&#x27;标题&#x27;</span></span><br><span class="line">    <span class="attr">menu:</span></span><br><span class="line">        <span class="string">M</span> <span class="comment"># - name: 博客</span></span><br><span class="line">        <span class="string">M</span> <span class="comment"># icon: fas fa-rss</span></span><br><span class="line">        <span class="string">M</span> <span class="comment"># url: /</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">分类</span></span><br><span class="line">            <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-tags</span></span><br><span class="line">            <span class="attr">url:</span> <span class="string">tags/</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">标签</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-tags</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">tags/</span></span><br><span class="line">        <span class="string">M</span> <span class="comment"># - name: 归档</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># icon: fas fa-archive</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># url: archives/</span></span><br><span class="line">        <span class="string">M</span> <span class="comment"># - name: 友链</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># icon: fas fa-link</span></span><br><span class="line">    <span class="string">M</span> <span class="comment"># url: friends/</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">关于</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-info-circle</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">about/</span></span><br><span class="line">        <span class="attr">search:</span> <span class="string">你想看点什么呢？</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="布局配置"><a href="#布局配置" class="headerlink" title="布局配置"></a>布局配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">layout:</span></span><br><span class="line"><span class="attr">on_page:</span></span><br><span class="line"><span class="attr">M body:</span> [<span class="string">article</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins:</span></span><br><span class="line"><span class="attr">backstretch:</span></span><br><span class="line"><span class="attr">M position:</span> <span class="string">fixed</span></span><br><span class="line"><span class="attr">aplayer:</span></span><br><span class="line"><span class="attr">M id:</span> <span class="number">170672512</span></span><br><span class="line"><span class="attr">M autoplay:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F030e52f5-b2d0-4a4f-b55c-0a3b58e04239%2FUntitled.png?table=block&id=b9f55037-fcbd-4e24-842a-695381f423db&name=Untitled.png&cache=v2"></p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
+              
+            </div>
+          
+        </div>
         
           
-  <h2 class="title">
-    <a href="/2020/08/07/2020-08-06/">
-      Github + Hexo 爬坑之旅【1】 —— 基础搭建
-    </a>
-  </h2>
 
 
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
         
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-07T11:10:32+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 7, 2020</p>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Aug 7, 2020</p>
   </a>
 </div>
 
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/07/2020-08-06/" class="leancloud_visitors" data-flag-title="Github + Hexo 爬坑之旅【1】 —— 基础搭建">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/07/2020-08-06/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/07/2020-08-06/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>没有一个自己的个人博客，显然是不够程序员的，于是今天在一番折腾之下，通过 Github + Hexo 配置了一个在线的博客，特此记录。当然如果喜欢更加偏向文档风格的童鞋，可以选择 Vuepress。</p>
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
       
     </div>
-    
-      
-        <a class= "readmore" href="/2020/08/07/2020-08-06/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
   </section>
-</article>
 
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/08/07/2020-08-07_2/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>前端造轮子【1】 —— vue-router</p>
+                <p class='content'>今天我们来研究一下 vue-router 的内部实现原理。
+我们知道，vue app 是 spa，是没有页面之间的跳转的，说的直白一点就是没有刷新。那么在不刷新页面的情况下，怎么实现一个项目中，...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/08/07/2020-08-06/'>
+                <p class='title'>Github + Hexo 爬坑之旅【1】 —— 基础搭建<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>没有一个自己的个人博客，显然是不够程序员的，于是今天在一番折腾之下，通过 Github + Hexo 配置了一个在线的博客，特此记录。当然如果喜欢更加偏向文档风格的童鞋，可以选择 Vuepres...</p>
+              </a>
+            
           </div>
         
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
+      </section>
+    </article>
   
 
 
-	
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
 </div>
 <aside class='l_side'>
   
@@ -704,27 +486,28 @@
     
     
 
-  
 
-  
-    
-    
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">站点配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-text">主题配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="toc-text">封面配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%85%8D%E7%BD%AE"><span class="toc-text">导航栏配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="toc-text">布局配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-text">插件配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="toc-text">最终效果</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
