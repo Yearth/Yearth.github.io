@@ -555,6 +555,7 @@
 <p>老规矩，上脑图：</p>
 <p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F593e548f-0163-4539-80f0-5445f097aae3%2FUntitled.png?table=block&id=9de497b7-2bea-4fda-a9e6-ea0c08126c85&name=Untitled.png&cache=v2"></p>
 <p>到这里，整个 Vue 的初始化流程就已经粗浅的梳理完毕了，具体的每一个核心功能点到底是如何实现的，就还得继续深入分析才能知道了。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">Vue 2.6 源码分析之旅 - 一：初始化流程</a></p>
 
           
             <div class='article_footer'>
@@ -593,7 +594,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-12T16:18:03+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-12T16:50:45+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Aug 12, 2020</p>
@@ -622,16 +623,10 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/08/12/2020-08-12/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Vue 2.6 源码分析之旅【0】 —— 调试环境搭建</p>
+            
+              <a class='next' href='/2020/08/12/2020-08-12/'>
+                <p class='title'>Vue 2.6 源码分析之旅【0】 —— 调试环境搭建<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
                 <p class='content'>以前很多 vue 原理相关的知识，比如响应式，比如虚拟 dom，比如 diff 算法……但都没有真正深入的看过源码，正因为此，这些知识宛如空中楼阁，空洞且并没有什么说服力。所以今天开始对 vue...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/08/11/2020-08-10/'>
-                <p class='title'>前端造轮子【3】 —— mvvm<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>今天我们来研究一下 vue2 的响应式实现原理。
-这里是前辈研究 vue 响应式原理缩写的代码和文章，非常具有学习价值，强烈建议阅读完本文之后继续学习：《剖析 Vue 实现原理 - 如何实现双向...</p>
               </a>
             
           </div>
@@ -667,7 +662,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">寻找构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">初始化流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#initLifecycle-vm"><span class="toc-text">initLifecycle(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initEvents-vm"><span class="toc-text">initEvents(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initRender-vm"><span class="toc-text">initRender(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#callHook-vm-%E2%80%98beforeCreate%E2%80%99"><span class="toc-text">callHook(vm, ‘beforeCreate’)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initInjections-vm"><span class="toc-text">initInjections(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initState-vm"><span class="toc-text">initState(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initProvide-vm"><span class="toc-text">initProvide(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#callHook-vm-%E2%80%98created%E2%80%99"><span class="toc-text">callHook(vm, ‘created’)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stateMixin-Vue"><span class="toc-text">stateMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eventsMixin-Vue"><span class="toc-text">eventsMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lifecycleMixin-Vue"><span class="toc-text">lifecycleMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#renderMixin-Vue"><span class="toc-text">renderMixin(Vue)</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">寻找构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">初始化流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#initLifecycle-vm"><span class="toc-text">initLifecycle(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initEvents-vm"><span class="toc-text">initEvents(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initRender-vm"><span class="toc-text">initRender(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#callHook-vm-%E2%80%98beforeCreate%E2%80%99"><span class="toc-text">callHook(vm, ‘beforeCreate’)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initInjections-vm"><span class="toc-text">initInjections(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initState-vm"><span class="toc-text">initState(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initProvide-vm"><span class="toc-text">initProvide(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#callHook-vm-%E2%80%98created%E2%80%99"><span class="toc-text">callHook(vm, ‘created’)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stateMixin-Vue"><span class="toc-text">stateMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eventsMixin-Vue"><span class="toc-text">eventsMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lifecycleMixin-Vue"><span class="toc-text">lifecycleMixin(Vue)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#renderMixin-Vue"><span class="toc-text">renderMixin(Vue)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
     </div>
   </section>
 
