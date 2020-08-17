@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive: 2020/8 - 世界的侧面</title>
+  <title>Vue 2.6 源码分析之旅【2】 —— 数据响应式 - 世界的侧面</title>
   
 
   
@@ -70,7 +68,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -262,10 +260,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">Vue 2.6 源码分析之旅【2】 —— 数据响应式</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/08/17/2020-08-17/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -300,36 +298,11 @@
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -339,11 +312,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/08/17/2020-08-17/">
       Vue 2.6 源码分析之旅【2】 —— 数据响应式
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -382,42 +355,6 @@
 
             
           
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/17/2020-08-17/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【2】 —— 数据响应式">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/17/2020-08-17/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/17/2020-08-17/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -427,10 +364,11 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">上一章</a>粗浅的分析了 vue 2.6.x 的初始化流程，搞清楚了以下几个问题：</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p><a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">上一章</a>粗浅的分析了 vue 2.6.x 的初始化流程，搞清楚了以下几个问题：</p>
 <ul>
 <li>vue 的入口在哪里</li>
 <li>vue 的初始化做了什么操作</li>
@@ -577,886 +515,92 @@
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">Vue 2.6 源码分析之旅 - 二：数据响应式</a></p>
 <p>那么本篇的粗浅分析到此为止，剩下的来日再议论吧！<br>咕咕咕~ 🐥 🐥 🐥</p>
 
-      
-    </div>
+          
+            <div class='article_footer'>
+              
+                
+  
     
-      
     
-  </section>
-</article>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/13/2020-08-12_1/">
-      Vue 2.6 源码分析之旅【1】 —— 初始化流程
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
               
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 13, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/13/2020-08-12_1/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【1】 —— 初始化流程">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/13/2020-08-12_1/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/13/2020-08-12_1/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
+            </div>
           
         </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
+          
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Vue 源码还是比较庞大的，如果分析源码没有条理，直接一头扎进去，很容易陷进代码海中，一通分析下来一头雾水，还打击信心。</p>
-<p>那么应该怎么分析源码呢？</p>
-<p>以下是个人总结的几点经验，如有谬误之处，望指出：</p>
-<ul>
-<li>首要任务是找到入口，如 Vue 则找到其构造函数</li>
-<li>先理清主线，后分析实现，别被细枝末节的代码影响思路</li>
-</ul>
-<p>那么接下来，我们就来尝试找找 Vue 的构造函数吧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/13/2020-08-12_1/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/12/2020-08-12/">
-      Vue 2.6 源码分析之旅【0】 —— 调试环境搭建
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-17T16:08:21+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 12, 2020</p>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Aug 17, 2020</p>
   </a>
 </div>
 
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/12/2020-08-12/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【0】 —— 调试环境搭建">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/12/2020-08-12/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/12/2020-08-12/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>以前很多 vue 原理相关的知识，比如响应式，比如虚拟 dom，比如 diff 算法……但都没有真正深入的看过源码，正因为此，这些知识宛如空中楼阁，空洞且并没有什么说服力。所以今天开始对 vue 进行粗浅的源码分析。</p>
-<p>要分析源码，自然首先要搭建调试环境，这样才可以通过编写测试 demo 快速定位到我们想要分析的位置。</p>
-<p>那么开始吧！</p>
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
       
     </div>
-    
-      
-        <a class= "readmore" href="/2020/08/12/2020-08-12/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
   </section>
-</article>
 
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/08/13/2020-08-12_1/'>
+                <p class='title'>Vue 2.6 源码分析之旅【1】 —— 初始化流程<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Vue 源码还是比较庞大的，如果分析源码没有条理，直接一头扎进去，很容易陷进代码海中，一通分析下来一头雾水，还打击信心。
+那么应该怎么分析源码呢？
+以下是个人总结的几点经验，如有谬误之处，望指出...</p>
+              </a>
+            
           </div>
         
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+      </section>
+    </article>
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/11/2020-08-10/">
-      前端造轮子【3】 —— mvvm
-    </a>
-  </h2>
 
 
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
-            
-          
-            
-              
 
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 11, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/11/2020-08-10/" class="leancloud_visitors" data-flag-title="前端造轮子【3】 —— mvvm">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/11/2020-08-10/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/11/2020-08-10/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天我们来研究一下 vue2 的响应式实现原理。</p>
-<p>这里是前辈研究 vue 响应式原理缩写的代码和文章，非常具有学习价值，强烈建议阅读完本文之后继续学习：<a target="_blank" rel="noopener" href="https://github.com/DMQ/mvvm">《剖析 Vue 实现原理 - 如何实现双向绑定 mvvm》</a></p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/11/2020-08-10/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/10/2020-08-07_3/">
-      前端造轮子【2】 —— vuex
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 10, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/10/2020-08-07_3/" class="leancloud_visitors" data-flag-title="前端造轮子【2】 —— vuex">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/10/2020-08-07_3/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/10/2020-08-07_3/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天我们来研究一下 vuex 的内部实现原理。<br>我们知道 vuex 是 vue 官方的状态管理库。至于什么是状态管理库呢？这个大概要从 flux 说起。大家感兴趣的可以看看阮一峰老师的文章：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/flux.html">Flux 架构入门教程</a></p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/10/2020-08-07_3/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/10/2020-08-07_2/">
-      前端造轮子【1】 —— vue-router
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 10, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/10/2020-08-07_2/" class="leancloud_visitors" data-flag-title="前端造轮子【1】 —— vue-router">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/10/2020-08-07_2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/10/2020-08-07_2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天我们来研究一下 vue-router 的内部实现原理。</p>
-<p>我们知道，vue app 是 spa，是没有页面之间的跳转的，说的直白一点就是没有刷新。那么在不刷新页面的情况下，怎么实现一个项目中，不同页面，不同组件之间的切换展示呢？</p>
-<p>通过学习 vue-router 的源码，可以得知，浏览器为我们提供了两个方案：</p>
-<ul>
-<li>hash（就是页面上的 #）</li>
-<li>history（h5）</li>
-</ul>
-<p>今天我们就简单来实现一下通过 hash 的方式实现 vue 的路由跳转。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/10/2020-08-07_2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/07/2020-08-07_1/">
-      Github + Hexo 爬坑之旅【2】 —— 网站配置
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 7, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/07/2020-08-07_1/" class="leancloud_visitors" data-flag-title="Github + Hexo 爬坑之旅【2】 —— 网站配置">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/07/2020-08-07_1/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/07/2020-08-07_1/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面已经将网站的基本架子搭好了，但通用的配置显然并不适用于每一个人，这里就通过配置文件稍微自定义一下。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/07/2020-08-07_1/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/07/2020-08-06/">
-      Github + Hexo 爬坑之旅【1】 —— 基础搭建
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 7, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/07/2020-08-06/" class="leancloud_visitors" data-flag-title="Github + Hexo 爬坑之旅【1】 —— 基础搭建">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/07/2020-08-06/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/07/2020-08-06/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>没有一个自己的个人博客，显然是不够程序员的，于是今天在一番折腾之下，通过 Github + Hexo 配置了一个在线的博客，特此记录。当然如果喜欢更加偏向文档风格的童鞋，可以选择 Vuepress。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/07/2020-08-06/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
 </div>
 <aside class='l_side'>
   
@@ -1466,27 +610,28 @@
     
     
 
-  
 
-  
-    
-    
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="toc-text">处理对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BB%BA%E7%AB%8B-Dep-%E5%92%8C-Watcher-%E7%9A%84%E5%8F%8C%E5%90%91%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="toc-text">为什么要建立 Dep 和 Watcher 的双向关系？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88Observer-%E4%B8%AD%E7%9A%84-Dep%EF%BC%89%E6%98%AF%E5%B9%B2%E5%98%9B%E7%9A%84%EF%BC%9F"><span class="toc-text">对象依赖管理器（Observer 中的 Dep）是干嘛的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88defineReactive-%E4%B8%AD%E7%9A%84-Dep%EF%BC%89%E6%98%AF%E5%B9%B2%E5%98%9B%E7%9A%84%EF%BC%9F"><span class="toc-text">数据依赖管理器（defineReactive 中的 Dep）是干嘛的？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%95%B0%E7%BB%84"><span class="toc-text">处理数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
