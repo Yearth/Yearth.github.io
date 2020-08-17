@@ -20,6 +20,15 @@
   
 
   
+    <meta name="description" content="上一章粗浅的分析了 vue 2.6.x 的初始化流程，搞清楚了以下几个问题：
+
+vue 的入口在哪里
+vue 的初始化做了什么操作
+在 vue 初始化过程中，哪些操作先执行，哪些操作后执行
+
+而今天，我们将分析 vue 2.6.x 中是如何完成数据响应式操作的。
+那么开始吧！">
+  
 
   <!-- feed -->
   
@@ -376,6 +385,8 @@
 </ul>
 <p>而今天，我们将分析 vue 2.6.x 中是如何完成数据响应式操作的。</p>
 <p>那么开始吧！</p>
+<a id="more"></a>
+
 <h2 id="处理对象"><a href="#处理对象" class="headerlink" title="处理对象"></a>处理对象</h2><p>相信大家都知道，vue 2.6.x 中实现数据响应式的核心方法是 <code>Object.defineProperty</code>，而这个方法并不能处理数组，所以 vue 对于数组和对象的处理方法是不同的，这里我们就先来分析它是如何处理对象的。</p>
 <p>通过上一章的分析，我们知道，在初始化流程中，处理数据的方法是 <code>initState</code>：</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initState</span>(<span class="params">vm: Component</span>) </span>&#123;</span><br><span class="line">  vm._watchers = []</span><br><span class="line">  <span class="keyword">const</span> opts = vm.$options</span><br><span class="line">  <span class="keyword">if</span> (opts.props) initProps(vm, opts.props)</span><br><span class="line">  <span class="keyword">if</span> (opts.methods) initMethods(vm, opts.methods)</span><br><span class="line">  <span class="keyword">if</span> (opts.data) &#123;</span><br><span class="line">    initData(vm)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    observe((vm._data = &#123;&#125;), <span class="literal">true</span> <span class="comment">/* asRootData */</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (opts.computed) initComputed(vm, opts.computed)</span><br><span class="line">  <span class="keyword">if</span> (opts.watch &amp;&amp; opts.watch !== nativeWatch) &#123;</span><br><span class="line">    initWatch(vm, opts.watch)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -552,7 +563,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-17T16:08:21+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-17T17:25:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Aug 17, 2020</p>
