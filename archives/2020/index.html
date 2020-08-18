@@ -322,9 +322,145 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/08/18/2020-08-18/">
+      Vue 2.6 源码分析之旅【3】 —— 异步更新策略
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
+    <img no-lazy src="">
+    <p>初心Yearth</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Aug 18, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              
+  <div class="new-meta-item browse valine">
+    <a class='notlink'>
+      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+      
+      <span id="/2020/08/18/2020-08-18/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【3】 —— 异步更新策略">
+      <p>
+        <span class="leancloud-visitors-count"></span>
+      </p>
+      </span>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+<div class="new-meta-item comments-count">
+  
+  <a href="/2020/08/18/2020-08-18/#comments">
+    <i class="fas fa-comment-dots fa-fw"></i>
+    <span class="valine-comment-count" data-xid="/2020/08/18/2020-08-18/">0</span>
+    <span class="leancloud-comments-count">&nbsp;</span>
+  </a>
+</div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">上一章</a>我们分析了 vue 2.6.x 的数据响应式原理，弄清楚了以下几个问题：</p>
+<ul>
+<li>vue 数据响应式是在什么阶段实现的</li>
+<li>vue 数据响应式是在什么位置实现的</li>
+<li>实现 vue 数据响应式的核心原理</li>
+<li>vue 是如何进行依赖收集的</li>
+<li>dep 和 watcher 的关系，以及各自的作用</li>
+</ul>
+<p>而今天我们将分析 vue 异步更新策略，相信读完本文，将会对以下问题有初步的认知：</p>
+<ul>
+<li>vue 是在什么阶段进行视图更新的</li>
+<li>vue 是在什么位置进行视图更新的</li>
+<li>实现 vue 异步更新的核心原理</li>
+</ul>
+<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/08/18/2020-08-18/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
