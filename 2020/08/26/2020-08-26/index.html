@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0-beta2'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>Vue 2.6 源码分析之旅【9】 —— 整体梳理 - 世界的侧面</title>
+  
+
+  
+    <meta name="description" content="本系列完整目录
+Vue 2.6 源码分析之旅 - 零：调试环境搭建
+Vue 2.6 源码分析之旅 - 一：初始化流程
+Vue 2.6 源码分析之旅 - 二：数据响应式
+Vue 2.6 源码分析之旅 - 三：异步更新策略
+Vue 2.6 源码分析之旅 - 四：diff 算法
+Vue 2.6 源码分析之旅 - 五：模...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+    <link rel="shortcut icon" type='image/x-icon' href="https://s1.ax1x.com/2020/08/06/agXE9K.png">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+    
+      <p class="title">世界的侧面</p>
+    
+    
+  </div>
+  <div class='b'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="你想看点什么呢？" />
+          <i class="icon fas fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation search'>
+      <div class='list-h'>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            Yearth
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+
+
+<div id="pjax-data" style="display: none">
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">Vue 2.6 源码分析之旅【9】 —— 整体梳理</div>
+  <div id="pjax-enable-cover">true</div>
+  <div id="pjax-permalink">http://yoursite.com/2020/08/26/2020-08-26/</div>
+  
+  <div id="valine-path">none</div>
+  <div id="valine-placeholder">none</div>
+  
+  
+</div>
+
+
+<script>
+  // 处理封面 此时 jquery 还没加载
+  if ("blog" == "none") { // 移除封面
+    document.getElementsByClassName('cover')[0].style.display = "none";
+    document.getElementsByClassName('l_body')[0].classList.add("nocover");
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
+  } else {
+    if ("blog" == "blog") { // 半屏
+      document.getElementsByClassName('cover')[0].classList.remove("full");
+      document.getElementsByClassName('cover')[0].classList.add("half");
+      document.getElementsByClassName('scroll-down')[0].style.display = "none";
+    } else if ("blog" == "docs") { // 全屏
+      document.getElementsByClassName('cover')[0].classList.remove("half");
+      document.getElementsByClassName('cover')[0].classList.add("full");
+      document.getElementsByClassName('scroll-down')[0].style.display = "";
+    }
+    document.getElementsByClassName('cover')[0].style.display = "";
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover");
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show");
+  }
+</script>
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/08/26/2020-08-26/">
+      Vue 2.6 源码分析之旅【9】 —— 整体梳理
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
+    <img no-lazy src="">
+    <p>初心Yearth</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Aug 26, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <h2 id="本系列完整目录"><a href="#本系列完整目录" class="headerlink" title="本系列完整目录"></a>本系列完整目录</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/7e28290bbbf94a49bac13ecb3869f33e">Vue 2.6 源码分析之旅 - 零：调试环境搭建</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">Vue 2.6 源码分析之旅 - 一：初始化流程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">Vue 2.6 源码分析之旅 - 二：数据响应式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/a4f8ae7852b146aabab526625917aaa0">Vue 2.6 源码分析之旅 - 三：异步更新策略</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/84d930624a1d4731b5d58b6648d33a2d">Vue 2.6 源码分析之旅 - 四：diff 算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/84d930624a1d4731b5d58b6648d33a2d">Vue 2.6 源码分析之旅 - 五：模板编译</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/7c596ed57ee74702a0c3f0bee260dd30">Vue 2.6 源码分析之旅 - 六：组件化机制</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/3ee888dab7264e5eb307f115b8aa80d6">Vue 2.6 源码分析之旅 - 终：整体梳理</a></li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经过这一段时间的学习，我们对于 vue 2.6 有了比之前更深的认识：了解了 vue 初始化的大致流程，数据响应式是如何实现的，vue 是如何进行异步更新的，diff 算法的细节，以及模板编译的流程和组件化机制。</p>
+<p>似乎对于每个机制，我们都有一定的认识和理解，但目前这些知识是相对零散，碎片的，举个简单的例子：</p>
+<p>我们知道创建自定义组件节点的方法是 createElement，那么是谁调用 createElement？在这个流程中完整的调用栈应该是什么样的？</p>
+<p>我想，上面的问题，可能大家有一定的印象：是在渲染的过程中调用的 createElement，即 updateComponent。但这只是一个大致的印象，并没有非常明确的主线。</p>
+<p>所以我们需要将之前零散的知识串联袭来，帮助我们更深的记忆和理解 vue 源码。</p>
+<p>那么开始吧(๑•̀ㅂ•́)و✧！</p>
+<a id="more"></a>
+
+<h2 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h2><p>我们希望能看到一条相对比较明显的主线，那么直接看源码显然是不合适的，即便我们已经对 vue 源码有了一定的了解，这也会让我们陷入繁杂的代码海，很快就迷失方向。</p>
+<p>这个时候，我们应该利用调试来帮助我们梳理流程。</p>
+<p>那么我们来分析一下我们的调试 demo 应该怎么编写：</p>
+<ul>
+<li>要研究 vue 初始化流程：不需要额外操作，<strong>new Vue 即可</strong></li>
+<li>要研究 vue 数据响应式：<strong>需要有 data</strong></li>
+<li>要研究 vue 事件处理：<strong>需要有 methods</strong></li>
+<li>要研究 vue 异步更新策略：<strong>需要更新 data</strong></li>
+<li>要研究 vue diff 算法：同样，<strong>需要更新 data</strong></li>
+<li>要研究 vue 模板编译：不需要额外操作，<strong>new Vue 即可</strong></li>
+<li>要研究 vue 组件化机制：<strong>需要有 Vue.component</strong></li>
+</ul>
+<p>综上，很容易得出我们的测试 demo：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">&quot;demo&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;vue 流程梳理&lt;/h1&gt;</span><br><span class="line">    &lt;p @click=<span class="string">&quot;handleClick&quot;</span>&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;comp&gt;&lt;/comp&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    Vue.component(<span class="string">&#x27;comp&#x27;</span>, &#123;</span><br><span class="line">      template: <span class="string">&#x27;&lt;div&gt;I am comp&lt;/div&gt;&#x27;</span>,</span><br><span class="line">      data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          msg: <span class="string">&#x27;hello comp&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el: <span class="string">&#x27;#demo&#x27;</span>,</span><br><span class="line">      data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          msg: <span class="string">&#x27;hello vue&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      mounted() &#123;</span><br><span class="line">        <span class="built_in">this</span>.msg = <span class="string">&#x27;hello new vue&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">        handleClick() &#123;</span><br><span class="line">          <span class="built_in">this</span>.msg = <span class="string">&#x27;hello new new vue&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(app.$options.render)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那么接下来就可以开始调试了：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2f811050-bcaf-4acb-8a9e-530b4db836a7%2FUntitled.png?table=block&id=3180b35d-fb97-42b6-b215-5e7f5095f4a1&name=Untitled.png&cache=v2"></p>
+<p>首先来到 init，对于这个部分，我们知道的信息有：</p>
+<ul>
+<li><p>文件位置：<code>src/core/instance/init.js</code></p>
+</li>
+<li><p>关键操作：</p>
+<ul>
+<li><p>合并选项：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$options = mergeOptions(resolveConstructorOptions(vm.constructor), options || &#123;&#125;, vm)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>各种初始化</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm._self = vm</span><br><span class="line">initLifecycle(vm)</span><br><span class="line">initEvents(vm)</span><br><span class="line">initRender(vm)</span><br><span class="line">callHook(vm, <span class="string">&#x27;beforeCreate&#x27;</span>)</span><br><span class="line">initInjections(vm)</span><br><span class="line">initState(vm)</span><br><span class="line">initProvide(vm)</span><br><span class="line">callHook(vm, <span class="string">&#x27;created&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挂载</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$mount(vm.$options.el)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>然后我们通过调试观察一下。</p>
+<p>合并选项前：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd19b6f93-6ee3-498c-b3bf-130260592f7d%2FUntitled.png?table=block&id=d091384c-a817-4be3-82f0-85c49da43794&name=Untitled.png&cache=v2"></p>
+<p>合并选项后：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc46bc467-a2fe-4379-9a66-1a3cdc295c9a%2FUntitled.png?table=block&id=bd926886-943f-4360-b07e-250c52b108f5&name=Untitled.png&cache=v2"></p>
+<p>可以看到，这里在实例上新增了一个 <code>$options</code>，并且我们知道 render 函数就放在 <code>$options</code> 上，那么我们来看看现在 <code>$options</code> 上有哪些东西。</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e87f69ba-d4c2-4f47-8bc4-5f103e2dd5f4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200826/us-west-2/s3/aws4_request&X-Amz-Date=20200826T044116Z&X-Amz-Expires=86400&X-Amz-Signature=7efc52bad4c965902ec55337b120be62895ccaf20a2a15398e71b49647d98056&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>显然这个时候还没有进行模板编译。</p>
+<p>我们继续往后走，来到初始化阶段，看看这里分别做了什么操作，并且梳理出来。</p>
+<h3 id="initLifecycle-vm"><a href="#initLifecycle-vm" class="headerlink" title="initLifecycle(vm)"></a>initLifecycle(vm)</h3><p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2b7047b0-545a-48fd-addb-b721e35ee7cd/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200826/us-west-2/s3/aws4_request&X-Amz-Date=20200826T044128Z&X-Amz-Expires=86400&X-Amz-Signature=858263353c71e59933bc703f1a6db95c2880ad709de2e074a903cfd705018b39&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>可以看到，在执行生命周期初始化之后，实例上多了一些东西：</p>
+<ul>
+<li><code>$children: Arrary</code></li>
+<li><code>$parent: undefined</code></li>
+<li><code>$refs: Object</code></li>
+<li><code>$root: Vue</code></li>
+<li><code>_watcher: null</code></li>
+<li><code>_inactive: null</code></li>
+<li><code>_directInactive: Boolean</code></li>
+<li><code>_isMounted: Boolean</code></li>
+<li><code>_isDestroyed: Boolean</code></li>
+<li><code>_isBeingDestroyed: Boolean</code></li>
+</ul>
+<p>说明在这个流程中，确定了组件的关系，以及自身的状态标志。</p>
+<p>脑图如下：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F987f79ec-a0f4-4050-8c7f-2fef6fc67255%2FUntitled.png?table=block&id=da132128-34c2-405e-b414-649a6d085a41&name=Untitled.png&cache=v2"></p>
+<h3 id="initEvents-vm"><a href="#initEvents-vm" class="headerlink" title="initEvents(vm)"></a>initEvents(vm)</h3><p>这个函数的流程如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initEvents → updateComponentListeners → updateListeners → add</span><br></pre></td></tr></table></figure>
+
+<p>而 add 函数如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">event, fn</span>) </span>&#123;</span><br><span class="line">  target.$on(event, fn)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明这里是用 <code>$on</code> 处理事件监听。</p>
+<p>然而一番调试下来，并没有按照预想的事件监听逻辑走下去，vm 实例上也没有新增 <code>$on</code> 属性。那么我们仔细看看代码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initEvents</span>(<span class="params">vm: Component</span>) </span>&#123;</span><br><span class="line">  vm._events = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  vm._hasHookEvent = <span class="literal">false</span></span><br><span class="line">  <span class="comment">// init parent attached events</span></span><br><span class="line">  <span class="keyword">const</span> listeners = vm.$options._parentListeners</span><br><span class="line">  <span class="keyword">if</span> (listeners) &#123;</span><br><span class="line">    updateComponentListeners(vm, listeners)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有几个关键点：</p>
+<ul>
+<li>注释</li>
+<li><code>_parentListeners</code></li>
+</ul>
+<p>我们知道，从 init 到这里，并没有任何地方设置了 <code>_parentListeners</code>，说明这里的 initEvents 处理的应该是自定义事件，那么我们修改一下测试 demo：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">&quot;demo&quot;</span>&gt;</span><br><span class="line">      &lt;h1&gt;vue 流程梳理&lt;/h1&gt;</span><br><span class="line">      &lt;p @click=<span class="string">&quot;handleClick&quot;</span>&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;comp @click=<span class="string">&quot;handleClickComp&quot;</span>&gt;&lt;/comp&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      Vue.component(<span class="string">&#x27;comp&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;&lt;div @click=&quot;handleClick&quot;&gt;I am comp&lt;/div&gt;&#x27;</span>,</span><br><span class="line">        data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&#x27;hello comp&#x27;</span>,</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">          handleClick() &#123;</span><br><span class="line">            <span class="built_in">this</span>.$emit(<span class="string">&#x27;click&#x27;</span>)</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">        el: <span class="string">&#x27;#demo&#x27;</span>,</span><br><span class="line">        data() &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&#x27;hello vue&#x27;</span>,</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        mounted() &#123;</span><br><span class="line">          <span class="built_in">this</span>.msg = <span class="string">&#x27;hello new vue&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">          handleClick() &#123;</span><br><span class="line">            <span class="built_in">this</span>.msg = <span class="string">&#x27;hello new new vue&#x27;</span></span><br><span class="line">          &#125;,</span><br><span class="line">          handleClickComp() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;click comp&#x27;</span>)</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="built_in">console</span>.log(app.$options.render)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接下来找到给 <code>_parentListeners</code> 赋值的地方：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * filepath: src/core/instance/init.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initInternalComponent</span>(<span class="params">vm: Component, options: InternalComponentOptions</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> opts = (vm.$options = <span class="built_in">Object</span>.create(vm.constructor.options))</span><br><span class="line">  <span class="comment">/*...*/</span></span><br><span class="line">  opts._parentListeners = vnodeComponentOptions.listeners</span><br><span class="line">  <span class="comment">/*...*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来将断点下在这里进行调试，看看调用栈：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe7f58a32-f41f-47ee-840c-cfe085cdc92d%2FUntitled.png?table=block&id=d9df9c51-bdbb-421b-8df5-69129a7b5124&name=Untitled.png&cache=v2"></p>
+<p>这里的流程大致如下：</p>
+<ul>
+<li>父组件初始化，挂载</li>
+<li>patch 过程中触发 createComponent 用于生成子组件</li>
+<li>在子组件的初始化过程中调用了 initInternalComponent</li>
+</ul>
+<p>接着我们回到 initMixin，来看看这段代码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initMixin</span>(<span class="params">Vue: Class&lt;Component&gt;</span>) </span>&#123;</span><br><span class="line">  Vue.prototype._init = <span class="function"><span class="keyword">function</span> (<span class="params">options?: Object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (options &amp;&amp; options._isComponent) &#123;</span><br><span class="line">      <span class="comment">// optimize internal component instantiation</span></span><br><span class="line">      <span class="comment">// since dynamic options merging is pretty slow, and none of the</span></span><br><span class="line">      <span class="comment">// internal component options needs special treatment.</span></span><br><span class="line">      initInternalComponent(vm, options)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      vm.$options = mergeOptions(resolveConstructorOptions(vm.constructor), options || &#123;&#125;, vm)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们知道：</p>
+<ul>
+<li>父组件会走选项合并的逻辑</li>
+<li>子组件会进入 initInternalComponent</li>
+</ul>
+<p>好了，这个时候，我们应该回过头来，继续看 <code>initEvents(vm)</code>。如果继续深入下去，很可能一不小心就迷失了主线。</p>
+<p>现在，我们清楚了：<code>initEvents(vm)</code> 是用于处理自定义事件的。</p>
+<p>更新脑图：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F68537670-e66e-43f8-82ac-708dabd99a56%2FVue.png?table=block&id=cd0823e6-776c-4b9f-8a03-626f7d5e25d7&name=Vue.png&cache=v2"></p>
+<h3 id="initRender-vm"><a href="#initRender-vm" class="headerlink" title="initRender(vm)"></a>initRender(vm)</h3><p>看命名就知道，这和渲染相关。</p>
+<p>我们先看看这一句执行完之后 vm 实例有什么变化：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8bd0c683-9a14-4bc1-a000-3be3e4c9cd4c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200826/us-west-2/s3/aws4_request&X-Amz-Date=20200826T044220Z&X-Amz-Expires=86400&X-Amz-Signature=110d06712f09a5980a3d7c3ee20f14a57cbae6e008133e06878358ef00370bc2&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>可以看到，最关键的有：</p>
+<ul>
+<li><code>_c：function</code></li>
+<li><code>$createElement：function</code></li>
+<li><code>$attrs：Object</code></li>
+<li><code>$listeners：Object</code></li>
+<li><code>$slots：Object</code></li>
+<li><code>$scopedSlots：Object</code></li>
+</ul>
+<p>并且我们知道 <code>_c</code> 和 <code>$createElement</code> 都是用来创建 vnode 的，区别在于，<code>$createElement</code> 是为用户提供的。</p>
+<p>所以这里最主要的目的是绑定渲染函数（这个时候并未执行），插槽，额外属性事件等。</p>
+<p>更新脑图：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d1f2e5b7-e909-4c05-8c5a-8fead7bdbd7e/Vue.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200826/us-west-2/s3/aws4_request&X-Amz-Date=20200826T044249Z&X-Amz-Expires=86400&X-Amz-Signature=fb7a914b25de303bcd3c936560b65e0e57d5b5976227c4eb7547809eab7ec5f0&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Vue.png%22"></p>
+<h3 id="initState-vm"><a href="#initState-vm" class="headerlink" title="initState(vm)"></a>initState(vm)</h3><p>前面的 <code>initInjections(vm)</code> 和后面的 <code>initProvide(vm)</code> 这里可以不用太关心。我们把注意力放在 initState，因为这是实现响应式的地方。</p>
+<p>这里依次处理了：</p>
+<ul>
+<li>props</li>
+<li>methods</li>
+<li>data</li>
+<li>computed</li>
+<li>watch</li>
+</ul>
+<p>在做数据响应式的流程中，首先用 <code>proxy</code> 做了 <code>data</code> 的代理到 <code>_data</code> 上，然后在 <code>observer</code> 完成了数据响应式的核心功能。</p>
+<p>这里有一些需要理清楚的点：</p>
+<ul>
+<li><code>new Observer(value)</code> 的第一个参数是 opt.data，即我们为组件写的 data</li>
+<li>每一个 Object 类型的数据才会有一个对应的 <code>new Observer(value)</code>，普通的数据是没有的</li>
+<li>在 <code>Observer</code> 的构造函数中会 <code>new Dep()</code>，所以每一个 Object 类型的数据具有一个 dep</li>
+<li>在 <code>Observer</code> 的 <code>walk</code> 中会遍历 value 这个 Object，然后对其属性调用 <code>defineReactive</code> 进行响应式处理</li>
+<li>在 <code>defineReactive</code> 中会再次 <code>new Dep()</code>，所以每一个 Object 下的属性也都具有自己的 dep</li>
+<li>如果 value 存在嵌套的 Object，则会在 <code>defineProperty</code> 中<strong>递归</strong>，调用的函数是 <code>observe</code></li>
+<li>实现数据响应式的核心方法为 <code>Object.defineProperty</code></li>
+<li>在 <code>get：reactiveGetter</code> 中实现依赖收集</li>
+<li>在 <code>set：reactiveSetter</code> 中实现触发更新</li>
+<li>在依赖收集阶段会建立 <strong>Watcher 和 Dep 的双向关系</strong></li>
+<li>由于在依赖收集阶段建立了 Watcher 和 Dep 的关系，所以在触发更新阶段，可以通过 <code>dep.notify()</code> 遍历 Dep 管理的 Watcher 数组，调用其中的 <code>update</code> 从而触发更新</li>
+</ul>
+<p>补上脑图看看：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/23469050-e901-4eae-bc62-db54373c216f/Vue.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200826/us-west-2/s3/aws4_request&X-Amz-Date=20200826T044324Z&X-Amz-Expires=86400&X-Amz-Signature=3c4e99a063f0044b8f9c060062b40e88e823ebaf37725d2729ffc994cfac735e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Vue.png%22"></p>
+<p>当然，如果顺着 update 继续分析下去，就是异步更新的故事了。</p>
+<p>这里我们把目光先收回来，去顺着主线往下看：现在各种选项配置，初始化已经完成了，到了挂载的步骤了。</p>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>这里调用 $mount 进行挂载，那这个 $mount 是从哪儿来的？</p>
+<p>这里借助调试器就能帮我们找到答案：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * filepath: src/platform/web/entry-runtime-with-compiler.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Vue.prototype.$mount = <span class="function"><span class="keyword">function</span> (<span class="params">el?: string | Element, hydrating?: boolean</span>): <span class="title">Component</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们知道这里对基础的 <code>$mount</code> 进行了针对 web 平台的扩展。</p>
+<p>而这里的核心功能是生成 render 函数，调用方法为 <code>compileToFunctions</code>。</p>
+<p>顺着这条线可以继续挖掘：</p>
+<ul>
+<li><code>compileToFunctions</code> 来自 <code>createCompiler</code></li>
+<li><code>createCompiler</code> 又来自 <code>createCompilerCreator</code></li>
+<li>在 <code>createCompilerCreator</code> 中做了三个操作：<ul>
+<li><code>parse</code>：<strong>解析</strong>生成 ast 树</li>
+<li><code>optimize</code>：<strong>优化</strong> ast 树，做静态节点标记</li>
+<li><code>generate</code>：<strong>生成</strong>渲染函数 code</li>
+</ul>
+</li>
+</ul>
+<p>至此，渲染函数 <code>render</code> 已成功生成并且挂到 <code>$options</code> 上，紧接着，调用 <code>mountComponent</code>，在这里进行了挂载操作：</p>
+<ul>
+<li>首先调用钩子 beforeMount</li>
+<li>核心方法为 <code>updateComponent</code>，其执行流程为：<ul>
+<li>先调用 <code>vm._render()</code> 生成 vnode</li>
+<li>再调用 <code>vm._update()</code> 将 vnode 转化为真实 dom</li>
+</ul>
+</li>
+<li>执行了 <code>new Watcher()</code>，所以之后可以完成响应式的更改视图<ul>
+<li><code>Watcher</code> 的第二个参数为 <code>updateComponent</code>，其作用为更新视图</li>
+</ul>
+</li>
+</ul>
+<p>这里的重点分别是 <code>_render</code> 和 <code>_update</code>，我们分别来看看。</p>
+<h2 id="render"><a href="#render" class="headerlink" title="_render"></a><code>_render</code></h2><p>在 mount 扩展完成之后，已经生成了对应的 render，并且挂到 <code>$options</code> 上，所以这里我们可以通过 <code>console.log(app.$options.render)</code> 将其打印出来：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">with</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> _c(</span><br><span class="line">      <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line">      &#123; <span class="attr">attrs</span>: &#123; <span class="attr">id</span>: <span class="string">&#x27;demo&#x27;</span> &#125; &#125;,</span><br><span class="line">      [</span><br><span class="line">        _c(<span class="string">&#x27;h1&#x27;</span>, [_v(<span class="string">&#x27;vue 流程梳理&#x27;</span>)]),</span><br><span class="line">        _v(<span class="string">&#x27; &#x27;</span>),</span><br><span class="line">        _c(<span class="string">&#x27;p&#x27;</span>, &#123; <span class="attr">on</span>: &#123; <span class="attr">click</span>: handleClick &#125; &#125;, [_v(_s(msg))]),</span><br><span class="line">        _v(<span class="string">&#x27; &#x27;</span>),</span><br><span class="line">        _c(<span class="string">&#x27;comp&#x27;</span>, &#123; <span class="attr">on</span>: &#123; <span class="attr">click</span>: handleClickComp &#125; &#125;),</span><br><span class="line">      ],</span><br><span class="line">      <span class="number">1</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>由于 patch 相对重要且复杂，所以这里先补上脑图，然后再深入分析 patch，它会涉及到 diff 算法，异步更新等。</p>
+<p>可以看到，这里是通过 <code>_c</code> 创建节点的，而前面初始化的时候，我们已经知道，<strong>在</strong> <code>initRender</code> <strong>的时候，会生成</strong> <code>_c</code><strong>，其核心方法为</strong> <code>_createElement</code>，而在这里，分两种情况进行处理：</p>
+<ul>
+<li>自定义组件：<code>createComponent</code></li>
+<li>html 保留标签：<code>new VNode()</code></li>
+</ul>
+<p>那么深入下去则可以看到对于自定义组件的处理细节：</p>
+<ul>
+<li>异步组件：<code>createAsyncPlaceholder</code></li>
+<li>处理双向绑定：<code>transformModel</code></li>
+<li>处理数据：<code>extractPropsFromVNodeData</code></li>
+<li>函数组件：<code>createFunctionalComponent</code></li>
+<li>安装组件的管理钩子：<code>installComponentHooks</code></li>
+<li>最后 <code>new Vnode()</code> 并且返回</li>
+</ul>
+<p>而 <code>_update</code> 的核心功能都在 <code>__patch__</code> 中，包括大名鼎鼎的 diff 算法，也是发生在这里的。</p>
+<h3 id="Patch"><a href="#Patch" class="headerlink" title="Patch"></a>Patch</h3><p>patch 中的处理大体分为两类：</p>
+<ul>
+<li><strong>新节点为定义：删除</strong></li>
+<li><strong>老节点未定义：新增</strong></li>
+</ul>
+<p>其中第一个情况较为罕见，在新增的逻辑中，最核心的方法是 <code>createElm</code>，它的功能是创建一个新节点，并且这里创建节点要分两种情况处理：</p>
+<ul>
+<li>自定义组件：<code>createComponent</code></li>
+<li>html 保留标签：<code>createChildren</code></li>
+</ul>
+<p>其中在处理自定义组件的时候，会调用自定义组件的钩子函数完成初始化操作，进行 mount，至于自定义组件的注册，待会儿再讲。</p>
+<p>然后在处理 html 保留节点的时候，实际上还是通过 <code>createElm</code> 递归创建的。</p>
+<p>最后，在 <code>patch</code> 中，完成新节点的创建之后，会调用 <code>removeVnodes</code> 将老节点删除，这个时候就完成了界面的更新。</p>
+<p>接下来应该补充的是，diff 算法的核心代码：<code>patchVnode</code></p>
+<h3 id="patchVnode"><a href="#patchVnode" class="headerlink" title="patchVnode"></a>patchVnode</h3><p>diff 的逻辑比较复杂，大体可以分为已下几种情况：</p>
+<ul>
+<li><strong>新老节点都有</strong>子节点，则调用 <code>updateChildren</code></li>
+<li><strong>新⽼节点都没有</strong>⼦节点，进行文本替换</li>
+<li><strong>新节点有</strong>⼦节点⽽<strong>⽼节点没有</strong>⼦节点，则先清空老节点的文本内容，然后为其新增子节点</li>
+<li><strong>新节点没有</strong>⼦节点⽽<strong>⽼节点有</strong>⼦节点，则移除老节点的所有⼦节点</li>
+</ul>
+<p>上面的逻辑总结一下就是耳熟能详的：<strong>深度优先，同层比较</strong>。</p>
+<p>然后在 <code>updateChildren</code> 中，vue 对比较算法进行了一些优化，具体表现在：</p>
+<ul>
+<li>新增了四个游标，分别指向新老节点首尾，这里分别用：<strong>osi，oei，nsi，nei</strong> 代指</li>
+<li>将新老节点的首尾都取出来，这里分别用：<strong>osv，oev，nsv，nev</strong> 代指</li>
+<li>对节点进行遍历，退出条件为新老节点游标不重合，遍历中分为五种情况来处理：<ol>
+<li><code>sameVnode(osv, nsv)</code>：<code>patchVnode</code></li>
+<li><code>sameVnode(oev, nev)</code>：<code>patchVnode</code></li>
+<li><code>sameVnode(osv, nev)</code>：<code>patchVnode</code>，移动节点</li>
+<li><code>sameVnode(oev, nsv)</code>：<code>patchVnode</code>，移动节点</li>
+<li>其他情况：将 <strong>nsv</strong> 拿到老节点中去遍历查找：<ul>
+<li>找到了：<code>patchVnode</code>，移动节点</li>
+<li>没找到：<code>createElm</code> 新增节点</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>当遍历结束之后，则分为三种情况处理：<ol>
+<li><code>osi &gt; oei</code>：说明有新增节点，调用 <code>addVnodes</code> 进行批量新增</li>
+<li><code>nsi &gt; nei</code>：说明有删除节点，调用 <code>removeVnodes</code> 进行批量删除</li>
+<li>其他情况：不做任何处理</li>
+</ol>
+</li>
+</ul>
+<p>到这里，除了异步更新和组件注册以外，都梳理的差不多了，我们先将脑图画出来看看：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2b9a8567-5b3d-4695-839c-f96761057ce5%2FVue.png?table=block&id=c10aaffe-24b6-4577-b7e9-8af3432e57ae&name=Vue.png&cache=v2"></p>
+<p>组件注册其实很简单，在调试器中下好断点很快就能定位到核心位置：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * filepatch: src/core/global-api/assets.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initAssetRegisters</span>(<span class="params">Vue: GlobalAPI</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件的构造函数就是在这里生成的。</p>
+<p>接下来我们应该顺着视图更新的路线去看看异步更新的流程。</p>
+<p>在 watcher 的 update 中，实现异步更新的是 <code>queueWatcher</code>，而这里需要注意的有以下几点：</p>
+<ul>
+<li>通过 <code>nextTick</code> 将更新任务放入为任务队列</li>
+<li><code>flushSchedulerQueue</code> 即更新任务的核心方法为 <code>watcher.run()</code></li>
+<li>在 <code>run</code> 中，实现更新的方法为 <code>this.get()</code></li>
+<li>而这个 get 是外部传入的第二个参数，即 <code>updateComponent</code></li>
+<li>实现异步的优先级如下：<code>promise &gt; MutationObserver &gt; setImmediate &gt; setTimeout</code></li>
+</ul>
+<p>脑图如下：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7dd377fc-cb58-41e0-bff9-af83b13d1f3c%2FVue.png?table=block&id=213b2ef2-139d-4bdf-8ecd-76650e194d03&name=Vue.png&cache=v2"></p>
+<p>至此，整条大纲已经梳理的差不多了，也可以回答一开始提出的那个问题了：</p>
+<p>是谁调用了 createElement？是 <code>_render</code> 函数，目的是为了生成 vnode。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/3ee888dab7264e5eb307f115b8aa80d6">Vue 2.6 源码分析之旅 - 终：整体梳理</a></p>
+<p>那么我们的 vue 2.6 源码分析之旅，就暂且告一段落了。事实上，留给我们的问题还有非常多：</p>
+<ul>
+<li>vue 是如何进行事件处理的？</li>
+<li>插槽是怎么实现的？</li>
+<li>依赖注入又是怎么实现的？</li>
+</ul>
+<p>等等等等，这些问题，就在未来的旅途中，再一一探寻吧！</p>
+<p>那么再会，咕咕咕<del>~</del></p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-26T12:46:21+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Aug 26, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/08/24/2020-08-24/'>
+                <p class='title'>Vue 2.6 源码分析之旅【6】 —— 组件化机制<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>前面我们分析了 vue 的模板编译，知道了 vue 中生成渲染函数的主要步骤，以及渲染函数的主要功能，今天我们分析的目标是组件化机制，相信在读完本文之后，大家对于以下问题应该都会有相应的认识：
+...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E5%AE%8C%E6%95%B4%E7%9B%AE%E5%BD%95"><span class="toc-text">本系列完整目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%A2%B3%E7%90%86"><span class="toc-text">流程梳理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#initLifecycle-vm"><span class="toc-text">initLifecycle(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initEvents-vm"><span class="toc-text">initEvents(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initRender-vm"><span class="toc-text">initRender(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initState-vm"><span class="toc-text">initState(vm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD"><span class="toc-text">挂载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#render"><span class="toc-text">_render</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Patch"><span class="toc-text">Patch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#patchVnode"><span class="toc-text">patchVnode</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='170672512'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xxx.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/yearth"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/playlist?id=83113059"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 Yearth</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/faqs/
+        
+        
+        
+        
+          id="https:volantisjsorgfaqs"
+        >
+        <i class='fa fa-question fa-fw'></i> 常见问题
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/examples/
+        
+        
+        
+        
+          id="https:volantisjsorgexamples"
+        >
+        <i class='fa fa-rss fa-fw'></i> 示例博客
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/contributors/
+        
+        
+        
+        
+          id="https:volantisjsorgcontributors"
+        >
+        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/volantis-docs/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xvolantis-docs"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 本站源码
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/hexo-theme-volantis/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xhexo-theme-volantis"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 主题源码
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>let CommentsSetting = new Object();</script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://gitee.com/wallpapers/minimalist/raw/master/2020/001.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/002.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/003.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/004.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/005.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/006.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/012.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/016.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/019.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/025.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/033.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/034.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/035.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/038.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/039.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/042.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/042.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/046.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/051.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/052.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/054.jpg", "https://gitee.com/wallpapers/minimalist/raw/master/2020/056.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '170672512';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    var valinePath = $.trim($('#valine-path').text()) === "none" ?
+            window.location.pathname : $.trim($('#valine-path').text());
+
+    var valinePlaceholder = $.trim($('#valine-placeholder').text()) === "none" ?
+            "快来评论吧~" : $.trim($('#valine-placeholder').text());
+
+    var ALLPATH = '';
+    if(ALLPATH != '') valinePath = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: valinePlaceholder,
+      path: valinePath,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+      
+      // 解绑事件 避免重复监听
+      $('.m-pc li').unbind('click');
+      $('.m-phone li').unbind('click');
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('') {
+            $('').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>
