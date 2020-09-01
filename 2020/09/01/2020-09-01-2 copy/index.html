@@ -16,16 +16,11 @@
 
   <!-- 页面元数据 -->
   
-  <title>前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？ - 世界的侧面</title>
+  <title>前端面试系列【002】 - 按要求完成 mergePromise 代码 - 世界的侧面</title>
   
 
   
-    <meta name="description" content="这里有两个问题：
-
-React 高阶组件、Render props 和 hooks 有什么区别？
-为什么要不断迭代？
-
-我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者分别是什么。">
+    <meta name="description" content="这里是一道与 js 执行流程的代码题，下面来看看题目吧！">
   
 
   <!-- feed -->
@@ -268,9 +263,9 @@ React 高阶组件、Render props 和 hooks 有什么区别？
 
 <div id="pjax-data" style="display: none">
   <div id="pjax-ispage">true</div>
-  <div id="pjax-pageTitle">前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？</div>
+  <div id="pjax-pageTitle">前端面试系列【002】 - 按要求完成 mergePromise 代码</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink">http://yoursite.com/2020/09/01/2020-09-01/</div>
+  <div id="pjax-permalink">http://yoursite.com/2020/09/01/2020-09-01-2%20copy/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -320,8 +315,8 @@ React 高阶组件、Render props 和 hooks 有什么区别？
         
           
   <h1 class="title">
-    <a href="/2020/09/01/2020-09-01/">
-      前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？
+    <a href="/2020/09/01/2020-09-01-2%20copy/">
+      前端面试系列【002】 - 按要求完成 mergePromise 代码
     </a>
   </h1>
 
@@ -375,73 +370,73 @@ React 高阶组件、Render props 和 hooks 有什么区别？
         <div class="article-entry" itemprop="articleBody">
           
           
-          <p>这里有两个问题：</p>
-<ul>
-<li>React 高阶组件、Render props 和 hooks 有什么区别？</li>
-<li>为什么要不断迭代？</li>
-</ul>
-<p>我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者分别是什么。</p>
+          <p>这里是一道与 js 执行流程的代码题，下面来看看题目吧！</p>
 <a id="more"></a>
 
-<h2 id="React-高阶组件"><a href="#React-高阶组件" class="headerlink" title="React 高阶组件"></a>React 高阶组件</h2><p>高阶组件（HOC）是 React 中用于复用组件逻辑的一种技巧。其本质是：</p>
-<p>接收一个组件作为参数，返回一个组件的函数</p>
-<p>来看个例子就明白了：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withSubscription</span>(<span class="params">WrapperdComponent, selectData</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="title">extend</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">        consturctor(props) &#123;</span><br><span class="line">            <span class="built_in">super</span>(props)</span><br><span class="line">            <span class="built_in">this</span>.state = &#123;</span><br><span class="line">                data: selectData(DataSource, props)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrapperdComponent</span> <span class="attr">data</span>=<span class="string">&#123;this.state.data&#125;</span> &#123;<span class="attr">...this.props</span>&#125; /&gt;</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeout = <span class="function">(<span class="params">ms</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve()</span><br><span class="line">    &#125;, ms)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ajax1 = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> timeout(<span class="number">2000</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ajax2 = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> timeout(<span class="number">1000</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ajax3 = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> timeout(<span class="number">2000</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mergePromise = <span class="function">(<span class="params">ajaxArray</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mergePromise([ajax1, ajax2, ajax3]).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;doen&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(data) <span class="comment">// data [1,2,3]</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行结果为 1 2 3 done [1,2,3]</span></span><br></pre></td></tr></table></figure>
 
-<p>高阶组件具有以下优缺点：</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>题目的需求是比较明确的，这里我们来逐步分析一下：</p>
 <ul>
-<li>优点<ul>
-<li>逻辑复用</li>
-<li>不影响被包裹的组件的内部逻辑</li>
+<li>首先 <code>timeout</code> 的功能是在 ms 的延迟之后进行 resolve</li>
+<li>那么 <code>ajax1, ajax2, ajax3</code> 的功能则分别是在 <code>2, 1, 2</code> s 的延迟后输出 <code>1, 2, 3</code></li>
 </ul>
-</li>
-<li>缺点<ul>
-<li>高阶组件传递给被包裹组件的 props 如果重名的话，会发生覆盖</li>
+<p>那么我们先来依次调用一下 <code>ajax1, ajax2, ajax3</code> 看看结果：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/db7783b7-f118-4d6d-b9fa-61708b589251/001.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200901/us-west-2/s3/aws4_request&X-Amz-Date=20200901T063904Z&X-Amz-Expires=86400&X-Amz-Signature=9e85b878dd44e0ec0619773cb785f1eb69e38e3cbf0b8f50b36d5f5b24e00c04&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22001.gif%22"></p>
+<p>这个其实很好解释，因为 js 是单线程的，遇到异步任务直接扔进队列中等待执行，那么这里的执行流程如下：</p>
+<ul>
+<li>遇到 <code>ajax1</code>，扔进队列，等待时间为 2s</li>
+<li>遇到 <code>ajax2</code>，扔进队列，等待时间为 1s</li>
+<li>遇到 <code>ajax3</code>，扔进队列，等待时间为 2s</li>
+<li>1s，<code>ajax2</code> 执行完毕，输出 2</li>
+<li>2s，<code>ajax1</code> 和 <code>ajax3</code> 执行完毕，因为 <code>ajax1</code> 先入队，所以输出 1, 3</li>
 </ul>
-</li>
+<p>那么题目的意思就很明显了，将并行改为串行，依次输出 1, 2, 3。至于后面的 <code>done [1, 2, 3]</code> 就相对简单了。</p>
+<p>要解决这个问题，首先需要完全弄明白 <code>ajax</code> 的流程，那么我们调试一下看看。</p>
+<p>将断点下在 <code>ajax</code> 入口处：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5e4f2323-1104-4424-9191-331c71cae51a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200901/us-west-2/s3/aws4_request&X-Amz-Date=20200901T063919Z&X-Amz-Expires=86400&X-Amz-Signature=96e516b8d239d5bbf5fa5a9af2d77f71244a4f14bb6d87510f7bf47652aeb887&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>接着进入函数：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fae996a01-df6a-49fc-9d69-91d72f5f7559%2FUntitled.png?table=block&id=28378223-dc5e-4452-b0c1-b10756470b2d&name=Untitled.png&cache=v2"></p>
+<p>可以看到，这个函数直接 <code>return</code> 了 <code>timeout</code>，再次进入函数：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4399666b-af56-4bb7-9778-0f817f508f26%2FUntitled.png?table=block&id=8918642c-e7b3-48f8-8de9-d8dbbfecc290&name=Untitled.png&cache=v2"></p>
+<p>这里则是 <code>return</code> 了 <code>Promise</code>，而我们知道 <code>Promise</code> 的 <code>then</code> 才是异步，所以这里肯定会直接走 <code>setTimeout</code>，具体流程为 ms 之后执行 <code>resolve</code>，而 <code>resolve</code> 则会来到 <code>timeout</code> 的 <code>then</code> 中：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/dcb06683-f167-416d-a8be-c04c88adc656/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200901/us-west-2/s3/aws4_request&X-Amz-Date=20200901T063958Z&X-Amz-Expires=86400&X-Amz-Signature=3695dc082270df5e8e0d6e587569c847a708a4da86bb855433199209e8b5ec18&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>这里 log 输出 1，然后 <code>return 1</code>，而 <code>return</code> 会来到 <code>ajax</code> 的 <code>then</code>：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb0ceb243-909a-4e4c-823a-4fc442a0f10d%2FUntitled.png?table=block&id=5b5659ff-ed5d-4f1d-b65e-fd743ee4bdd8&name=Untitled.png&cache=v2"></p>
+<p>最后结束调用。</p>
+<p>总结一下，流程就很清晰了：</p>
+<ul>
+<li>ajax → timeout → new Promise → setTimeout → resolve → timeout().then → return → ajax.then</li>
 </ul>
-<h2 id="Render-props"><a href="#Render-props" class="headerlink" title="Render props"></a>Render props</h2><p>Render props 是一种在 React 组件之间使用一个值为函数的 prop 共享代码的技术，具体来说就是：</p>
-<p>Render prop 是一个<strong>告知组件需要渲染什么内</strong>容的函数 prop</p>
-<p>来看个例子：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Class DataProvider <span class="keyword">extends</span> React.Components &#123;</span><br><span class="line">    state = &#123;</span><br><span class="line">        name: <span class="string">&quot;Alice&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;p&gt;共享数据组件自己内部的 render&lt;/p&gt;</span><br><span class="line">                &#123; <span class="built_in">this</span>.props.render(<span class="built_in">this</span>.state) &#125;</span><br><span class="line">            &lt;div/&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;DataProvider render=&#123;</span><br><span class="line">data =&gt; (<span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>共享的 render &#123;data.name&#125;<span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>所以这里如果直接调用 <code>ajax1</code>，则一定会在 2s 后同时输出两个 1：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/33d4afbe-e280-4f42-9984-c28cb8bd4876/002.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200901/us-west-2/s3/aws4_request&X-Amz-Date=20200901T064019Z&X-Amz-Expires=86400&X-Amz-Signature=3a72f9c011f619d2cd53900c22b32314613f2272e99c422ae1454f12ffea36fb&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22002.gif%22"></p>
+<p>可见，结果与预期相符。</p>
+<p>我们想要实现串行，那么关键点就是在 ajax.then 中调用下一个 ajax。显然，这里可以利用递归来实现：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergePromise = <span class="function">(<span class="params">ajaxArray</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> len = ajaxArray.length</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> next = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (idx === len) <span class="keyword">return</span> resolve()</span><br><span class="line">      ajaxArray[idx]().then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        idx++</span><br><span class="line">        next()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    next()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>相较于 hooks 和 hoc，render props 使用的场景较少，它具有以下优缺点：</p>
-<ul>
-<li>优点：<ul>
-<li>数据共享</li>
-<li>逻辑复用</li>
-</ul>
-</li>
-<li>缺点：<ul>
-<li>无法在 return 语句外访问数据</li>
-<li>嵌套</li>
-</ul>
-</li>
-</ul>
-<h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><p>Hooks 是 React 16.8 中新增的特性。它可以让你在不编写 class 的情况下使用 state，lifecycle 等 React 特性。</p>
-<p>通过自定义 hook，可以很轻松的实现逻辑复用。</p>
-<p>我们来看个例子：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useSubscription</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> data = DataSource.getComments()</span><br><span class="line">    <span class="keyword">return</span> [data]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CommentList</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;data&#125; = props</span><br><span class="line">    <span class="keyword">const</span> [subData] = useSubscription()</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        <span class="built_in">this</span> is data: &#123;data&#125;,</span><br><span class="line">        <span class="built_in">this</span> is subData: &#123;subData&#125;</span><br><span class="line">    &lt;div/&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>来看看效果：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F73c99fa8-81c9-4e09-ab74-b917032c98b6%2F003.gif?table=block&id=b265a4c5-2dc6-48db-9415-8c6bf534cc01&name=003.gif&cache=v2"></p>
+<p>到这里，已然实现了串行，距离题目的最终要求也就只差一步了。</p>
+<p>再回到题目</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行结果为 1 2 3 done [1,2,3]</span></span><br><span class="line">mergePromise([ajax1, ajax2, ajax3]).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;doen&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(data) <span class="comment">// data [1,2,3]</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>可以看到 hooks 结构清晰明了，具有以下优点：</p>
-<ul>
-<li>使用直观</li>
-<li>不存在 hoc 的重名问题</li>
-<li>不存在 render props 的嵌套问题</li>
-<li>能在 return 之外访问数据</li>
-</ul>
-<h2 id="回答"><a href="#回答" class="headerlink" title="回答"></a>回答</h2><p>现在已经明白了三者各自是什么，具有什么优缺点，那么最开始的问题就很好回答了。</p>
-<h3 id="React-高阶组件、Render-props-和-hooks-有什么区别？"><a href="#React-高阶组件、Render-props-和-hooks-有什么区别？" class="headerlink" title="React 高阶组件、Render props 和 hooks 有什么区别？"></a>React 高阶组件、Render props 和 hooks 有什么区别？</h3><p>三者都能用来进行逻辑复用。区别在于高阶组件为接收组件，对其进行包装，Render props 为在 render 中渲染共享数据，而 hooks 是以函数调用的形式共享数据。</p>
-<h3 id="为什么要不断迭代？"><a href="#为什么要不断迭代？" class="headerlink" title="为什么要不断迭代？"></a>为什么要不断迭代？</h3><p>在大部分情况下，高阶组件和 Render props 都存在各自的缺陷：</p>
-<ul>
-<li>重名问题</li>
-<li>嵌套问题</li>
-<li>无法在 return 之外访问数据的问题</li>
-<li>数据来源不清晰的问题</li>
-<li>……</li>
-</ul>
-<p>不断迭代是为了解决上述问题，让我们可以用更加简洁的方式实现组件逻辑复用，让写代码变得更加轻松和愉快。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/001-React-Render-props-hooks-e56da41045d347d1ba216abcd52eb77e">001 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？</a></p>
+<p>上面的代码说明 data 的值为 <code>[1, 2, 3]</code>。而显然来自于 <code>ajax</code> 的 <code>resolve</code>，那么这里借助一个中间变量，将每次的 data push 进去即可。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergePromise = <span class="function">(<span class="params">ajaxArray</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> len = ajaxArray.length</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> tmparr = []</span><br><span class="line">    <span class="keyword">const</span> next = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (idx === len) <span class="keyword">return</span> resolve(tmparr)</span><br><span class="line">      ajaxArray[idx]().then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        tmparr.push(data)</span><br><span class="line">        idx++</span><br><span class="line">        next()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    next()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后再来看看结果：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1981cedb-5099-4966-8a33-5821922fe03f/004.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200901/us-west-2/s3/aws4_request&X-Amz-Date=20200901T064044Z&X-Amz-Expires=86400&X-Amz-Signature=91ecb880257f2466c1cfad11d7a251241279b0dbcc9d56e1eefef5ed99e267da&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22004.gif%22"></p>
+<p>可以看到，结果与预期是相符的。</p>
+<h2 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h2><h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>既然这里是 <code>promise.then</code> 的实现，那自然能改造成 <code>async/await</code> 的方式。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergePromise = <span class="function">(<span class="params">ajaxArray</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> tmpArr = []</span><br><span class="line">    <span class="keyword">let</span> len = ajaxArray.length</span><br><span class="line">    <span class="keyword">while</span> (idx &lt; len) &#123;</span><br><span class="line">      <span class="keyword">let</span> data = <span class="keyword">await</span> ajaxArray[idx]()</span><br><span class="line">      tmpArr.push(data)</span><br><span class="line">      idx++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmpArr</span><br><span class="line">  &#125;)()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>前面的方法都是 es6 的愈语法，那么 es3 应该怎么实现呢？</p>
+<p>显然，这里需要用到闭包：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergePromise</span>(<span class="params">ajaxArray</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tmpArr = []</span><br><span class="line">  mergePromise.then = <span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">      ajaxArray[i]().then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        tmpArr.push(data)</span><br><span class="line">        <span class="keyword">if</span> (i !== ajaxArray.length - <span class="number">1</span>) &#123;</span><br><span class="line">          fn(++i)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tmpArr.length === ajaxArray.length) &#123;</span><br><span class="line">          cb(tmpArr)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    fn(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> mergePromise</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>上面将并行转换成串行的核心思路都是递归，那么不递归可以吗？</p>
+<p>答案是可以的：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergePromise = <span class="function">(<span class="params">ajaxArray</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> tmpArr = []</span><br><span class="line">    <span class="keyword">let</span> promise = ajaxArray</span><br><span class="line">      .map(<span class="function">(<span class="params">ajax</span>) =&gt;</span> <span class="function">() =&gt;</span> ajax().then(<span class="function">(<span class="params">data</span>) =&gt;</span> tmpArr.push(data)))</span><br><span class="line">      .reduce(<span class="function">(<span class="params">memo, cur</span>) =&gt;</span> <span class="function">() =&gt;</span> memo().then(cur))</span><br><span class="line">    promise().then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve(tmpArr)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/002-mergePromise-11258536692c469db6f701c66ff02e5f">002 - 按要求完成 mergePromise 代码</a></p>
 
           
             <div class='article_footer'>
@@ -480,7 +475,7 @@ React 高阶组件、Render props 和 hooks 有什么区别？
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-01T10:42:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-01T14:41:17+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Sep 1, 2020</p>
@@ -509,22 +504,15 @@ React 高阶组件、Render props 和 hooks 有什么区别？
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/09/01/2020-09-01-2%20copy/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>前端面试系列【002】 - 按要求完成 mergePromise 代码</p>
-                <p class='content'>这里是一道与 js 执行流程的代码题，下面来看看题目吧！
-
-
-123456789101112131415161718192021222324252627282930313233343536373...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/08/26/2020-08-26/'>
-                <p class='title'>Vue 2.6 源码分析之旅【9】 —— 整体梳理<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>本系列完整目录
-Vue 2.6 源码分析之旅 - 零：调试环境搭建
-Vue 2.6 源码分析之旅 - 一：初始化流程
-Vue 2.6 源码分析之旅 - 二：数据响应式
-Vue 2.6 源码分析之...</p>
+              <a class='next' href='/2020/09/01/2020-09-01/'>
+                <p class='title'>前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>这里有两个问题：
+
+React 高阶组件、Render props 和 hooks 有什么区别？
+为什么要不断迭代？
+
+我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者...</p>
               </a>
             
           </div>
@@ -560,7 +548,7 @@ Vue 2.6 源码分析之...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6"><span class="toc-text">React 高阶组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Render-props"><span class="toc-text">Render props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hooks"><span class="toc-text">Hooks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E7%AD%94"><span class="toc-text">回答</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6%E3%80%81Render-props-%E5%92%8C-hooks-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">React 高阶组件、Render props 和 hooks 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%8D%E6%96%AD%E8%BF%AD%E4%BB%A3%EF%BC%9F"><span class="toc-text">为什么要不断迭代？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-text">解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88"><span class="toc-text">其他方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-text">方案二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89"><span class="toc-text">方案三</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
     </div>
   </section>
 
