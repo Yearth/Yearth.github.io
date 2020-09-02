@@ -5,10 +5,6 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="index,follow">
-      
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -20,9 +16,15 @@
 
   <!-- 页面元数据 -->
   
-  <title>世界的侧面</title>
+  <title>前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施 - 世界的侧面</title>
   
 
+  
+    <meta name="description" content="基本概念先来看看 wiki 的说明吧：
+
+跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了 HTML 以及用户端脚本语言。
+
+说得通俗一点，就是攻...">
   
 
   <!-- feed -->
@@ -72,7 +74,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -264,10 +266,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/09/02/2020-09-02-2/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -278,16 +280,16 @@
 
 <script>
   // 处理封面 此时 jquery 还没加载
-  if ("docs" == "none") { // 移除封面
+  if ("blog" == "none") { // 移除封面
     document.getElementsByClassName('cover')[0].style.display = "none";
     document.getElementsByClassName('l_body')[0].classList.add("nocover");
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
   } else {
-    if ("docs" == "blog") { // 半屏
+    if ("blog" == "blog") { // 半屏
       document.getElementsByClassName('cover')[0].classList.remove("full");
       document.getElementsByClassName('cover')[0].classList.add("half");
       document.getElementsByClassName('scroll-down')[0].style.display = "none";
-    } else if ("docs" == "docs") { // 全屏
+    } else if ("blog" == "docs") { // 全屏
       document.getElementsByClassName('cover')[0].classList.remove("half");
       document.getElementsByClassName('cover')[0].classList.add("full");
       document.getElementsByClassName('scroll-down')[0].style.display = "";
@@ -303,53 +305,10 @@
 
 <div class='l_main'>
   
-  <section class="post-list ">
-    
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -359,11 +318,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/09/02/2020-09-02-2/">
       前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -402,42 +361,6 @@
 
             
           
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/02/2020-09-02-2/" class="leancloud_visitors" data-flag-title="前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/02/2020-09-02-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/02/2020-09-02-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -447,1206 +370,170 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>先来看看 wiki 的说明吧：</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>先来看看 wiki 的说明吧：</p>
 <blockquote>
 <p>跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了 HTML 以及用户端脚本语言。</p>
 </blockquote>
 <p>说得通俗一点，就是攻击者通过一些手法<strong>将可执行的脚本注入到网页中，在特定的情况下触发</strong>（可能是用户浏览网页，也可能是点击某些按钮）<strong>，从而达到恶意攻击的行为</strong>。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/02/2020-09-02-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+<a id="more"></a>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+<h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>这里引申出几个问题：</p>
+<ul>
+<li>如何将脚本注入到网页中？</li>
+<li>可能造成什么样的危害？</li>
+</ul>
+<p>要回答这些问题，我们先来看一个简单的例子：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">&quot;app&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;button&quot;</span> value=<span class="string">&quot;获取数据&quot;</span> onclick=<span class="string">&quot;test()&quot;</span> /&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;&lt;img src=&quot;11&quot; onerror=&quot;alert(\&#x27;xss\&#x27;)&quot; /&gt;&#x27;</span>]</span><br><span class="line">    <span class="keyword">const</span> app = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">    arr.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">      p.innerHTML = item</span><br><span class="line">      app.append(p)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当点击按钮获取数据的时候，xss 就触发了：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3aabeed6-cc70-467d-a23e-eedbf1b66aba%2F001.gif?table=block&id=c8d16067-cad1-4eef-bf84-569829554f1c&name=001.gif&cache=v2"></p>
+<p>这里本应展示在界面上的内容居然被当做脚本执行了，这显然是开发者不希望看到的。</p>
+<p>清楚了基本原理，我们来到第一个问题。</p>
+<h3 id="如何将脚本注入到网页中？"><a href="#如何将脚本注入到网页中？" class="headerlink" title="如何将脚本注入到网页中？"></a>如何将脚本注入到网页中？</h3><p>显然，想要将恶意脚本注入到网页中，一定需要一个能够接受输入的地方，而在输入之后，根据数据是否被保存到服务器上，XSS 被分为两类：</p>
+<ul>
+<li>反射型 XSS</li>
+<li>存储型（持久型）XSS</li>
+</ul>
+<p>从名字也能看出来，反射型 XSS 的恶意脚本并不会被保存，而存储型（持久型）XSS 的恶意脚本将会被长期保存在服务器。</p>
+<p>那么具体要如何注入呢？</p>
+<p>我们举一个非常简单的例子，假设下面是一个非常简陋的 todolist：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;text&quot;</span> οnkeydοwn=<span class="string">&quot;onEnter()&quot;</span> /&gt;</span><br><span class="line">  &lt;div id=<span class="string">&quot;app&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> input = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;input&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> app = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">  input.onkeypress = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.which === <span class="number">13</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(input.value)</span><br><span class="line">      p.innerHTML = input.value</span><br><span class="line">      app.append(p)</span><br><span class="line">            input.value = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>来验证一下这个 todolist 的效果：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a29615b1-c8d0-40e8-b6ab-ae8a258ae0b6/002.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T094502Z&X-Amz-Expires=86400&X-Amz-Signature=2d650ad34f6b364c5d3bf24ae2ae4f27daeeb0ae0960cffac9f413da43839d25&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22002.gif%22"></p>
+<p>可以看到，现在它已经可以正常工作了。</p>
+<p>这个时候，如果我们在 <code>input</code> 框中输入恶意脚本，会发生什么呢？</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F945ecf8c-2513-492f-9923-a1cc62a0756a%2F003.gif?table=block&id=363235e3-16d9-431c-9780-2223a5c3d5ba&name=003.gif&cache=v2"></p>
+<p>可见 XSS 就这样被触发了。因为输入的脚本并不会被保存到服务器上，不会持久存储，所以这里的 XSS 为反射型。</p>
+<p>而存储型 XSS 则有可能在发表文章，评论等位置出现，因为这些数据是会被上传到服务器上保存下来的。</p>
+<p>事实上，除了上述两种类型的 XSS 以外，还有一种较为特殊的类型：<strong>DOM Based XSS</strong>。</p>
+<p>从效果上来说，它也属于反射型 XSS，但由于形成原因较为特殊，所以也被单独划分为一类，下面我们来看一个简单的例子：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">&quot;t&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;text&quot;</span> id=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;&quot;</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;button&quot;</span> id=<span class="string">&quot;s&quot;</span> value=<span class="string">&quot;search&quot;</span> onclick=<span class="string">&quot;test()&quot;</span>&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> str = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#text&#x27;</span>).value</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#t&#x27;</span>).innerHTML = <span class="string">&#x27;&lt;a href=&quot;&#x27;</span> + str + <span class="string">&#x27;&quot; &gt;查找结果&lt;/a&gt;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个页面的作用是，如果 <code>input</code> 中输入的内容为一个可以跳转的链接，则点击查找结果之后会跳转到目标网页。（生成跳转链接的案例在平时工作中也是非常常见的。）</p>
+<p>由于这里 <code>str</code> 是受用户控制的，那么如果用户用 <code>&quot;</code> 和 <code>//</code> 将其前后截断，然后在中间插入恶意脚本，会造成什么样的后果呢？</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F01069c9f-5484-44ff-bd85-ee0e4745693a%2F004.gif?table=block&id=08e444a4-0804-40d6-8857-9ae849356a18&name=004.gif&cache=v2"></p>
+<p>显然，这也将造成 XSS，而这也就是 DOM Based XSS。</p>
+<h3 id="可能造成什么样的危害？"><a href="#可能造成什么样的危害？" class="headerlink" title="可能造成什么样的危害？"></a>可能造成什么样的危害？</h3><p>通过前面的介绍，我们知道，XSS 能够执行恶意脚本，主要是 JavaScript。那么，JS 能做到的事，通过 XSS 都能做到。</p>
+<p>攻击者通常会通过这些恶意脚本做以下操作：</p>
+<ul>
+<li><strong>获取敏感信息</strong></li>
+<li>跳转恶意链接</li>
+<li>结合浏览器漏洞提权种马</li>
+</ul>
+<h2 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h2><p>知道了 XSS 是如何攻击的，那么防御自然也就有了头绪。</p>
+<ul>
+<li>输入验证<ul>
+<li>校验常见的数字，url，电话，邮箱等</li>
+<li>过滤敏感字符</li>
+<li>开启浏览器 XSS 防御，如：http only cookie</li>
+</ul>
+</li>
+<li>输出编码<ul>
+<li>HTML，JS，CSS，URL 编码</li>
+<li>避免拼接 HTML，如 <code>v-html</code></li>
+<li>配置 CSP</li>
+</ul>
+</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/004-XSS-bd43e318074a4987aec3df39c41f4f4b">004 - 请描述 XSS 的基本概念，攻击原理和防御措施</a></p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/02/2020-09-02/">
-      前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
               
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 2, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/02/2020-09-02/" class="leancloud_visitors" data-flag-title="前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/02/2020-09-02/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/02/2020-09-02/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
+            </div>
           
         </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
+          
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要回答这道题，我们需要搞清楚下面的问题：</p>
-<ul>
-<li>什么是浅拷贝？</li>
-<li>什么是深拷贝？</li>
-<li>二者有什么区别？</li>
-<li>如何实现？</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/02/2020-09-02/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01-2/">
-      前端面试系列【002】 - 按要求完成 mergePromise 代码
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-02T17:45:38+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 2, 2020</p>
   </a>
 </div>
 
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01-2/" class="leancloud_visitors" data-flag-title="前端面试系列【002】 - 按要求完成 mergePromise 代码">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>这里是一道与 js 执行流程的代码题，下面来看看题目吧！</p>
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
       
     </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
   </section>
-</article>
 
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/09/02/2020-09-02/'>
+                <p class='title'>前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>要回答这道题，我们需要搞清楚下面的问题：
+
+什么是浅拷贝？
+什么是深拷贝？
+二者有什么区别？
+如何实现？
+
+那么便开始吧(๑•̀ㅂ•́)و✧！
+
+
+由来首先，我们知道在 js 中变量分为两种基础...</p>
+              </a>
+            
           </div>
         
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+      </section>
+    </article>
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01/">
-      前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？
-    </a>
-  </h2>
 
 
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01/" class="leancloud_visitors" data-flag-title="前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里有两个问题：</p>
-<ul>
-<li>React 高阶组件、Render props 和 hooks 有什么区别？</li>
-<li>为什么要不断迭代？</li>
-</ul>
-<p>我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者分别是什么。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/26/2020-08-26/">
-      Vue 2.6 源码分析之旅【9】 —— 整体梳理
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 26, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/26/2020-08-26/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【9】 —— 整体梳理">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/26/2020-08-26/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/26/2020-08-26/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="本系列完整目录"><a href="#本系列完整目录" class="headerlink" title="本系列完整目录"></a>本系列完整目录</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/7e28290bbbf94a49bac13ecb3869f33e">Vue 2.6 源码分析之旅 - 零：调试环境搭建</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">Vue 2.6 源码分析之旅 - 一：初始化流程</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">Vue 2.6 源码分析之旅 - 二：数据响应式</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/a4f8ae7852b146aabab526625917aaa0">Vue 2.6 源码分析之旅 - 三：异步更新策略</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/84d930624a1d4731b5d58b6648d33a2d">Vue 2.6 源码分析之旅 - 四：diff 算法</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/84d930624a1d4731b5d58b6648d33a2d">Vue 2.6 源码分析之旅 - 五：模板编译</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/7c596ed57ee74702a0c3f0bee260dd30">Vue 2.6 源码分析之旅 - 六：组件化机制</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/3ee888dab7264e5eb307f115b8aa80d6">Vue 2.6 源码分析之旅 - 终：整体梳理</a></li>
-</ul>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经过这一段时间的学习，我们对于 vue 2.6 有了比之前更深的认识：了解了 vue 初始化的大致流程，数据响应式是如何实现的，vue 是如何进行异步更新的，diff 算法的细节，以及模板编译的流程和组件化机制。</p>
-<p>似乎对于每个机制，我们都有一定的认识和理解，但目前这些知识是相对零散，碎片的，举个简单的例子：</p>
-<p>我们知道创建自定义组件节点的方法是 createElement，那么是谁调用 createElement？在这个流程中完整的调用栈应该是什么样的？</p>
-<p>我想，上面的问题，可能大家有一定的印象：是在渲染的过程中调用的 createElement，即 updateComponent。但这只是一个大致的印象，并没有非常明确的主线。</p>
-<p>所以我们需要将之前零散的知识串联袭来，帮助我们更深的记忆和理解 vue 源码。</p>
-<p>那么开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/26/2020-08-26/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/24/2020-08-24/">
-      Vue 2.6 源码分析之旅【6】 —— 组件化机制
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 24, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/24/2020-08-24/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【6】 —— 组件化机制">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/24/2020-08-24/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/24/2020-08-24/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面我们分析了 vue 的模板编译，知道了 vue 中生成渲染函数的主要步骤，以及渲染函数的主要功能，今天我们分析的目标是组件化机制，相信在读完本文之后，大家对于以下问题应该都会有相应的认识：</p>
-<ul>
-<li>vue 是怎么注册全局组件的？</li>
-<li>vue 是怎么渲染组件的？</li>
-<li>父子组件挂载的优先级如何？</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/24/2020-08-24/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/20/2020-08-20/">
-      Vue 2.6 源码分析之旅【5】 —— 模板编译
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 20, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/20/2020-08-20/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【5】 —— 模板编译">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/20/2020-08-20/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/20/2020-08-20/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>模板编译是 vue 作为一个前端 MVVM 框架最为核心的部分，我们今天的目标是粗浅的分析一下 vue 模板编译的主要流程，相信通过本次学习，我们将能够回答下面的问题：</p>
-<ul>
-<li>什么是模板编译？</li>
-<li>模板编译主要做了什么，流程如何？</li>
-<li>vue 指令中，v-for 和 v-if 的优先级如何？</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/20/2020-08-20/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/19/2020-08-19/">
-      Vue 2.6 源码分析之旅【4】 —— diff 算法
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 19, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/19/2020-08-19/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【4】 —— diff 算法">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/19/2020-08-19/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/19/2020-08-19/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.notion.so/a4f8ae7852b146aabab526625917aaa0">上一章</a>我们分析了 vue 2.6.x 的异步更新策略，弄清楚了以下几个问题：</p>
-<ul>
-<li>vue 是在什么阶段进行视图更新的</li>
-<li>vue 是在什么位置进行视图更新的</li>
-<li>实现 vue 异步更新的核心原理</li>
-</ul>
-<p>而今天我们将分析 vue diff 算法，相信读完本文，将会对以下问题有初步的认知：</p>
-<ul>
-<li>vue diff 算法发生在什么位置</li>
-<li>vue diff 算法的核心原理</li>
-<li>为什么推荐 v-for 要加上 key</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-<hr>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/19/2020-08-19/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/18/2020-08-18/">
-      Vue 2.6 源码分析之旅【3】 —— 异步更新策略
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 18, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/18/2020-08-18/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【3】 —— 异步更新策略">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/18/2020-08-18/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/18/2020-08-18/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">上一章</a>我们分析了 vue 2.6.x 的数据响应式原理，弄清楚了以下几个问题：</p>
-<ul>
-<li>vue 数据响应式是在什么阶段实现的</li>
-<li>vue 数据响应式是在什么位置实现的</li>
-<li>实现 vue 数据响应式的核心原理</li>
-<li>vue 是如何进行依赖收集的</li>
-<li>dep 和 watcher 的关系，以及各自的作用</li>
-</ul>
-<p>而今天我们将分析 vue 异步更新策略，相信读完本文，将会对以下问题有初步的认知：</p>
-<ul>
-<li>vue 是在什么阶段进行视图更新的</li>
-<li>vue 是在什么位置进行视图更新的</li>
-<li>实现 vue 异步更新的核心原理</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/18/2020-08-18/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/17/2020-08-17/">
-      Vue 2.6 源码分析之旅【2】 —— 数据响应式
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 17, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/17/2020-08-17/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【2】 —— 数据响应式">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/17/2020-08-17/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/17/2020-08-17/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.notion.so/37c7e6218fc449a684ace2de187f18d7">上一章</a>粗浅的分析了 vue 2.6.x 的初始化流程，搞清楚了以下几个问题：</p>
-<ul>
-<li>vue 的入口在哪里</li>
-<li>vue 的初始化做了什么操作</li>
-<li>在 vue 初始化过程中，哪些操作先执行，哪些操作后执行</li>
-</ul>
-<p>而今天，我们将分析 vue 2.6.x 中是如何完成数据响应式操作的。</p>
-<p>那么开始吧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/17/2020-08-17/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 2
-        </p>
-        
-          <a class="next" rel="next" href="/page/2/">
-            <section class="post next white-box shadow">
-              &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
 
 </div>
@@ -1658,13 +545,22 @@
     
     
 
-  
 
-  
-    
-    
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86"><span class="toc-text">攻击原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E8%84%9A%E6%9C%AC%E6%B3%A8%E5%85%A5%E5%88%B0%E7%BD%91%E9%A1%B5%E4%B8%AD%EF%BC%9F"><span class="toc-text">如何将脚本注入到网页中？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E9%80%A0%E6%88%90%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%8D%B1%E5%AE%B3%EF%BC%9F"><span class="toc-text">可能造成什么样的危害？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%8E%AA%E6%96%BD"><span class="toc-text">防御措施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
