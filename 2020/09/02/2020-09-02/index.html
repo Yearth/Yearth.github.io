@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,9 +16,18 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive: 2020/9 - 世界的侧面</title>
+  <title>前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝 - 世界的侧面</title>
   
 
+  
+    <meta name="description" content="要回答这道题，我们需要搞清楚下面的问题：
+
+什么是浅拷贝？
+什么是深拷贝？
+二者有什么区别？
+如何实现？
+
+那么便开始吧(๑•̀ㅂ•́)و✧！">
   
 
   <!-- feed -->
@@ -70,7 +77,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -262,10 +269,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/09/02/2020-09-02/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -300,26 +307,11 @@
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -329,11 +321,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/09/02/2020-09-02/">
       前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -372,42 +364,6 @@
 
             
           
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/02/2020-09-02/" class="leancloud_visitors" data-flag-title="前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/02/2020-09-02/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/02/2020-09-02/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -417,10 +373,11 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要回答这道题，我们需要搞清楚下面的问题：</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>要回答这道题，我们需要搞清楚下面的问题：</p>
 <ul>
 <li>什么是浅拷贝？</li>
 <li>什么是深拷贝？</li>
@@ -428,278 +385,142 @@
 <li>如何实现？</li>
 </ul>
 <p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/02/2020-09-02/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+<a id="more"></a>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
+<h2 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h2><p>首先，我们知道在 js 中变量分为两种<strong>基础类型</strong>和<strong>引用类型</strong>两种。当我们将一个基础类型的变量赋值给另一个变量的时候，会在内存中新开辟一块空间来存放，而我们将引用类型赋值给一个新的变量的时候，实际上只是让这两个变量都指向了同一块内存。</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7f7ff911-3efc-45aa-af13-400efc6a8f2c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T073656Z&X-Amz-Expires=86400&X-Amz-Signature=0c792819dbaec5e039386c36c6829b26a5a008608b6844b6c540babe2f9337fb&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>这个时候如果我们修改 objA，是能影响到 objB 的：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0bf35311-56e9-4ebb-88d3-a529ac3f6dc1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T073708Z&X-Amz-Expires=86400&X-Amz-Signature=f9d1dc70932fc7885aafc360623857cec27303633b2697b1e96ff07acf484850&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>明明修改的是 objA，却影响到了 objB，显然这是我们不希望看到的，由此就衍生出了拷贝技术：在赋值的时候即使目标是引用类型，也在内存中新开辟一块空间，将原始数据原封不动的拷贝过去，从而让我们再修改 objA 的时候并不会影响到 objB。</p>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>所谓浅拷贝，就是浅层次的对数据进行拷贝。</p>
+<p>回到上面的例子，如果用浅拷贝将 objA 赋值给 objB，那么无论 objA 如何改变，都不会影响到 objB。</p>
+<p>但如果 objA 中存在引用类型呢？</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objA = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Alice&#x27;</span>,</span><br><span class="line">  age: <span class="number">18</span>,</span><br><span class="line">  family: &#123;</span><br><span class="line">    mother: <span class="string">&#x27;Anna&#x27;</span>,</span><br><span class="line">    futher: <span class="string">&#x27;Jonh&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01-2/">
-      前端面试系列【002】 - 按要求完成 mergePromise 代码
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01-2/" class="leancloud_visitors" data-flag-title="前端面试系列【002】 - 按要求完成 mergePromise 代码">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里是一道与 js 执行流程的代码题，下面来看看题目吧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01/">
-      前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01/" class="leancloud_visitors" data-flag-title="前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里有两个问题：</p>
+<p>我们知道，拷贝是原封不动的将数据拷贝过去，所以这里 <code>family</code> 也会同样的拷贝过去，但由于它本身是一个引用类型，所以拷贝的也是指向同一块内存的指针，这个时候如果对 <code>family</code> 进行修改，objB 中的 <code>family</code> 显然是会被影响到的。</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/13482878-83ed-4baa-9a89-c5d543303ef4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T073721Z&X-Amz-Expires=86400&X-Amz-Signature=2c6c42c8309fc239cf75d05a90857cac5ab248553bbe1f8cf7854dd5acf027a0&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<h3 id="常用的浅拷贝"><a href="#常用的浅拷贝" class="headerlink" title="常用的浅拷贝"></a>常用的浅拷贝</h3><p>虽然浅拷贝存在上述隐患，却也是非常常用的技术，在日常工作中，除了自己造轮子以外，还有以下方法能够实现浅拷贝：</p>
 <ul>
-<li>React 高阶组件、Render props 和 hooks 有什么区别？</li>
-<li>为什么要不断迭代？</li>
+<li>ES6 扩展运算符</li>
+<li><code>Object.assign</code></li>
+<li><code>Array.prototype.slice</code></li>
+<li><code>Array.prototype.concat</code></li>
 </ul>
-<p>我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者分别是什么。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>既然浅拷贝是浅层次的对数据进行拷贝，那么顾名思义，深拷贝自然是深层次的对数据进行拷贝。无论被拷贝的对象的元素包含 <code>Object</code>，<code>Array</code> 还是 <code>Date</code>，<code>Promise</code>，甚至自身，深拷贝都应当能够完好的将数据完全复制到新开辟的内存空间中，这样，无论对原始对象进行任意修改，都不会影响到新生对象：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8af1ca34-d70a-4c7a-808e-650dbd749362/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T073734Z&X-Amz-Expires=86400&X-Amz-Signature=a70b1c082e2339cb66f3b24a4ef1b79c8fd3ac0a35a76e9e0372f455e6671fe5&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<h2 id="二者存在什么区别"><a href="#二者存在什么区别" class="headerlink" title="二者存在什么区别"></a>二者存在什么区别</h2><p>区别主要在于拷贝的层次不同：</p>
+<ul>
+<li>浅拷贝仅对数据的第一层进行拷贝，对于深层的数据依然是简单的使用赋值语句</li>
+<li>深拷贝将递归遍历整个对象，对其所有数据进行完全拷贝</li>
+</ul>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>实现深拷贝的核心思路比较简单：<strong>递归遍历原始对象，以基本类型为最小粒度进行赋值</strong>。</p>
+<p>这样一看似乎深拷贝实现起来也并不困难，但实际上需要考虑的点要更多一些：</p>
+<ul>
+<li>不同类型的处理：<code>Object, Array, Function, RegExp, Date, Promise...</code></li>
+<li>循环引用：<code>objA.me = objA</code></li>
+</ul>
+<p>对于循环引用，这里我们可以利用 <code>weakMap&lt;原对象引用, 新对象引用&gt;</code>：如果下次递归中判断当前引用等于原对象引用，则直接返回新创建对象的引用即可。</p>
+<p>而对于不同对象的处理，我们只需要按照不同对象进行构造即可，所以这里我们先假定对象中只有 <code>Object</code>，来实现带有循环引用的深拷贝，之后再增加类型。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">obj, me = new WeakMap()</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObject(obj)) <span class="keyword">return</span> obj</span><br><span class="line">  <span class="keyword">if</span> (me.get(obj)) <span class="keyword">return</span> me.get(obj)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> copy,</span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">  me.set(obj, result)</span><br><span class="line">  <span class="built_in">Object</span>.keys(obj).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">    copy = obj[key]</span><br><span class="line">    result[key] = isObject(copy) ? deepCopy(copy, me) : copy</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          </div>
+<p>接下来看看这段代码是否能够如期完成需求：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/92d2698a-7686-48f2-ad5c-df16d227d7e1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200902/us-west-2/s3/aws4_request&X-Amz-Date=20200902T073748Z&X-Amz-Expires=86400&X-Amz-Signature=0568c78335fc8b3b2e641ebd17379361ccbd934fc4bec988a303dd0995a8eb48&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>显然，利用 <code>WeakMap</code> 可以成功解决了最头疼的循环引用问题。</p>
+<blockquote>
+<p>当然，这里还有别的方法：比如维护两个循环引用的数组。但最简单直接的还是 <code>WeakMap</code></p>
+</blockquote>
+<p>完成了最核心的功能，接下来就是扩展类型了。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">typeof</span> obj === <span class="string">&#x27;object&#x27;</span> || <span class="keyword">typeof</span> obj === <span class="string">&#x27;function&#x27;</span>) &amp;&amp; obj !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArrary</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(obj)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDate</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">&#x27;[object Date]&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSet</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">&#x27;[object Set]&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isMap</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">&#x27;[object Map]&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isRegExp</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">&#x27;[object RegExp]&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFunction</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> obj === <span class="string">&#x27;function&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayCopy</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> val <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    res.push(val)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dateCopy</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">Date</span>(obj)</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCopy</span>(<span class="params">obj, me</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">  obj.forEach(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    res.add(deepCopy(val, me))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapCopy</span>(<span class="params">obj, me</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">  obj.forEach(<span class="function">(<span class="params">val, key</span>) =&gt;</span> &#123;</span><br><span class="line">    res.set(key, deepCopy(val, me))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">regExpCopy</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getRegExpInfo</span>(<span class="params">r</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> flags = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (r.global) flags += <span class="string">&#x27;g&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (r.ignoreCase) flags += <span class="string">&#x27;i&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (r.multiline) flags += <span class="string">&#x27;m&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> flags</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">RegExp</span>(obj.source, getRegExpInfo(obj))</span><br><span class="line">  <span class="keyword">if</span> (obj.lastIndex) res.lastIndex = obj.lastIndex</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionCopy</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">createFunction</span>(<span class="params">args, body</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (body) &#123;</span><br><span class="line">      <span class="keyword">if</span> (args) &#123;</span><br><span class="line">        <span class="keyword">const</span> argsArr = args[<span class="number">0</span>].split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(...argsArr, body[<span class="number">0</span>])</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(body[<span class="number">0</span>])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">createArrowsFunction</span>(<span class="params">funcString</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">eval</span>(funcString)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> bodyReg = <span class="regexp">/(?&lt;=&#123;)(.|\n)+(?=&#125;)/m</span></span><br><span class="line">  <span class="keyword">const</span> argsReg = <span class="regexp">/(?&lt;=\().+(?=\)\s+&#123;)/</span></span><br><span class="line">  <span class="keyword">const</span> funcString = obj.toString()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> body = bodyReg.exec(funcString)</span><br><span class="line">  <span class="keyword">const</span> args = argsReg.exec(funcString)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> obj.prototype ? createFunction(args, body) : createArrowsFunction(funcString)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">obj, me = new WeakMap()</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObject(obj)) <span class="keyword">return</span> obj</span><br><span class="line">  <span class="keyword">if</span> (me.get(obj)) <span class="keyword">return</span> me.get(obj)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> result, copy</span><br><span class="line">  <span class="keyword">if</span> (isArrary(obj)) &#123;</span><br><span class="line">    result = arrayCopy(obj)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isDate(obj)) &#123;</span><br><span class="line">    result = dateCopy(obj)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isSet(obj)) &#123;</span><br><span class="line">    result = setCopy(obj, me)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isMap(obj)) &#123;</span><br><span class="line">    result = mapCopy(obj, me)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isRegExp(obj)) &#123;</span><br><span class="line">    result = regExpCopy(obj)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isFunction(obj)) &#123;</span><br><span class="line">    result = functionCopy(obj)</span><br><span class="line">    me.set(obj, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  result = &#123;&#125;</span><br><span class="line">  me.set(obj, result)</span><br><span class="line">  <span class="built_in">Object</span>.keys(obj).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">    copy = obj[key]</span><br><span class="line">    result[key] = isObject(copy) ? deepCopy(copy, me) : copy</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/003-86d95731f5394ff3909864547dac1c21">003 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝</a></p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-02T15:38:24+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 2, 2020</p>
+  </a>
+</div>
+
         
       
-    
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+      
+    </div>
   </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/09/01/2020-09-01-2/'>
+                <p class='title'>前端面试系列【002】 - 按要求完成 mergePromise 代码<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>这里是一道与 js 执行流程的代码题，下面来看看题目吧！
+
+
+123456789101112131415161718192021222324252627282930313233343536373...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
 
 
-	
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
 </div>
 <aside class='l_side'>
   
@@ -709,27 +530,28 @@
     
     
 
-  
 
-  
-    
-    
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B1%E6%9D%A5"><span class="toc-text">由来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">常用的浅拷贝</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">深拷贝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%80%85%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-text">二者存在什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">如何实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
