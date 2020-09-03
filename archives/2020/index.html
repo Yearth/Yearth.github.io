@@ -344,6 +344,130 @@
         
           
   <h2 class="title">
+    <a href="/2020/09/03/2020-09-03-2/">
+      前端面试系列【006】 - 为什么 vue 组件的 data 必须是一个函数，而根实例则没有此限制？
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
+    <img no-lazy src="">
+    <p>初心Yearth</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Sep 3, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              
+  <div class="new-meta-item browse valine">
+    <a class='notlink'>
+      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+      
+      <span id="/2020/09/03/2020-09-03-2/" class="leancloud_visitors" data-flag-title="前端面试系列【006】 - 为什么 vue 组件的 data 必须是一个函数，而根实例则没有此限制？">
+      <p>
+        <span class="leancloud-visitors-count"></span>
+      </p>
+      </span>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+<div class="new-meta-item comments-count">
+  
+  <a href="/2020/09/03/2020-09-03-2/#comments">
+    <i class="fas fa-comment-dots fa-fw"></i>
+    <span class="valine-comment-count" data-xid="/2020/09/03/2020-09-03-2/">0</span>
+    <span class="leancloud-comments-count">&nbsp;</span>
+  </a>
+</div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文仅针对 vue 2.6.x。</p>
+</blockquote>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>首先，我们构造一个 component data 为 object 的 demo：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;demo&quot;</span>&gt;</span><br><span class="line">  &lt;h1&gt;vue component data&lt;/h1&gt;</span><br><span class="line">  &lt;comp&gt;&lt;/comp&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  Vue.component(<span class="string">&quot;comp&quot;</span>, &#123;</span><br><span class="line">    template: <span class="string">&quot;&lt;div&gt;I am comp&lt;/div&gt;&quot;</span>,</span><br><span class="line">    data: &#123; <span class="attr">count</span>: <span class="number">1</span> &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&quot;#demo&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/09/03/2020-09-03-2/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2020/09/03/2020-09-03/">
       前端面试系列【005】 - v-for 和 v-if 谁的优先级更高
     </a>
@@ -1457,140 +1581,6 @@
     
       
         <a class= "readmore" href="/2020/08/19/2020-08-19/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/18/2020-08-18/">
-      Vue 2.6 源码分析之旅【3】 —— 异步更新策略
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 18, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/18/2020-08-18/" class="leancloud_visitors" data-flag-title="Vue 2.6 源码分析之旅【3】 —— 异步更新策略">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/18/2020-08-18/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/18/2020-08-18/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.notion.so/8c0511b31a0745c4bc866d98dee89c39">上一章</a>我们分析了 vue 2.6.x 的数据响应式原理，弄清楚了以下几个问题：</p>
-<ul>
-<li>vue 数据响应式是在什么阶段实现的</li>
-<li>vue 数据响应式是在什么位置实现的</li>
-<li>实现 vue 数据响应式的核心原理</li>
-<li>vue 是如何进行依赖收集的</li>
-<li>dep 和 watcher 的关系，以及各自的作用</li>
-</ul>
-<p>而今天我们将分析 vue 异步更新策略，相信读完本文，将会对以下问题有初步的认知：</p>
-<ul>
-<li>vue 是在什么阶段进行视图更新的</li>
-<li>vue 是在什么位置进行视图更新的</li>
-<li>实现 vue 异步更新的核心原理</li>
-</ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/18/2020-08-18/">
           阅读全文 <i class="fas fa-chevron-right"></i>
         </a>
       
