@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,9 +16,12 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive: 2020/9 - 世界的侧面</title>
+  <title>前端面试系列【005】 - v-for 和 v-if 谁的优先级更高 - 世界的侧面</title>
   
 
+  
+    <meta name="description" content="对于这个问题，针对目前应用范围更广的 vue 2.6.x 来做回答。
+要弄清楚优先级问题，自然要从源码中来找答案，而这个答案在：compiler/codegen/index.js: genElement">
   
 
   <!-- feed -->
@@ -70,7 +71,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -262,10 +263,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">前端面试系列【005】 - v-for 和 v-if 谁的优先级更高</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/09/03/2020-09-03/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -300,30 +301,11 @@
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -333,11 +315,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/09/03/2020-09-03/">
       前端面试系列【005】 - v-for 和 v-if 谁的优先级更高
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -376,42 +358,6 @@
 
             
           
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/03/2020-09-03/" class="leancloud_visitors" data-flag-title="前端面试系列【005】 - v-for 和 v-if 谁的优先级更高">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/03/2020-09-03/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/03/2020-09-03/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -421,534 +367,134 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于这个问题，针对目前应用范围更广的 vue 2.6.x 来做回答。</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>对于这个问题，针对目前应用范围更广的 vue 2.6.x 来做回答。</p>
 <p>要弄清楚优先级问题，自然要从源码中来找答案，而这个答案在：<code>compiler/codegen/index.js: genElement</code></p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/03/2020-09-03/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+<a id="more"></a>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>这里我们直接来看看源码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">genElement</span>(<span class="params">el: ASTElement, state: CodegenState</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (el.parent) &#123;</span><br><span class="line">    el.pre = el.pre || el.parent.pre</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (el.staticRoot &amp;&amp; !el.staticProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genStatic(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.once &amp;&amp; !el.onceProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genOnce(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.for &amp;&amp; !el.forProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genFor(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.if &amp;&amp; !el.ifProcessed) &#123;</span><br><span class="line">    <span class="keyword">return</span> genIf(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.tag === <span class="string">&#x27;template&#x27;</span> &amp;&amp; !el.slotTarget &amp;&amp; !state.pre) &#123;</span><br><span class="line">    <span class="keyword">return</span> genChildren(el, state) || <span class="string">&#x27;void 0&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.tag === <span class="string">&#x27;slot&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> genSlot(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// component or element</span></span><br><span class="line">    <span class="keyword">let</span> code</span><br><span class="line">    <span class="keyword">if</span> (el.component) &#123;</span><br><span class="line">      code = genComponent(el.component, el, state)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> data</span><br><span class="line">      <span class="keyword">if</span> (!el.plain || (el.pre &amp;&amp; state.maybeComponent(el))) &#123;</span><br><span class="line">        data = genData(el, state)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> children = el.inlineTemplate ? <span class="literal">null</span> : genChildren(el, state, <span class="literal">true</span>)</span><br><span class="line">      code = <span class="string">`_c(&#x27;<span class="subst">$&#123;el.tag&#125;</span>&#x27;<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">        data ? <span class="string">`,<span class="subst">$&#123;data&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span> <span class="regexp">//</span> data</span></span></span><br><span class="line"><span class="string"><span class="subst">      &#125;</span><span class="subst">$&#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">        children ? <span class="string">`,<span class="subst">$&#123;children&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span> <span class="regexp">//</span> children</span></span></span><br><span class="line"><span class="string"><span class="subst">      &#125;</span>)`</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// module transforms</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; state.transforms.length; i++) &#123;</span><br><span class="line">      code = state.transforms[i](el, code)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> code</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/02/2020-09-02-2/">
-      前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 2, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/02/2020-09-02-2/" class="leancloud_visitors" data-flag-title="前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/02/2020-09-02-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/02/2020-09-02-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>先来看看 wiki 的说明吧：</p>
-<blockquote>
-<p>跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了 HTML 以及用户端脚本语言。</p>
-</blockquote>
-<p>说得通俗一点，就是攻击者通过一些手法<strong>将可执行的脚本注入到网页中，在特定的情况下触发</strong>（可能是用户浏览网页，也可能是点击某些按钮）<strong>，从而达到恶意攻击的行为</strong>。</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/02/2020-09-02-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/02/2020-09-02/">
-      前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 2, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/02/2020-09-02/" class="leancloud_visitors" data-flag-title="前端面试系列【003】 - 什么是深拷贝，和浅拷贝有什么区别，动手实现一个深拷贝">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/02/2020-09-02/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/02/2020-09-02/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要回答这道题，我们需要搞清楚下面的问题：</p>
+<p>从上面的代码可以看到，这里是先处理 for 然后处理 if，那么，显然 <strong>for 的优先级是高于 if</strong> 的。</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>对于这个问题，可以稍微扩展一下，引申出下面两个问题：</p>
 <ul>
-<li>什么是浅拷贝？</li>
-<li>什么是深拷贝？</li>
-<li>二者有什么区别？</li>
-<li>如何实现？</li>
+<li>如果 <code>v-if</code> 和 <code>v-for</code> 同时出现在一个标签中，会不会出现什么问题？</li>
+<li>如果出现问题，应该去怎么优化？</li>
+<li>在优化的时候，怎么让性能更好？</li>
 </ul>
-<p>那么便开始吧(๑•̀ㅂ•́)و✧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/02/2020-09-02/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+<p>对于这些问题，通过一个 demo 就可以很好的说明：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;demo&quot;</span>&gt;</span><br><span class="line">  &lt;h1&gt;v-<span class="keyword">if</span> 和 v-<span class="keyword">for</span>&lt;/h1&gt;</span><br><span class="line">  &lt;p v-<span class="keyword">for</span>=<span class="string">&quot;a in arr&quot;</span> v-<span class="keyword">if</span>=<span class="string">&quot;a.isShow&quot;</span> :key=<span class="string">&quot;a.txt&quot;</span>&gt;</span><br><span class="line">    &#123;&#123; a.txt &#125;&#125;</span><br><span class="line">  &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&quot;#demo&quot;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      isShow: <span class="literal">false</span>,</span><br><span class="line">      arr: [</span><br><span class="line">        &#123;</span><br><span class="line">          txt: <span class="number">1</span>,</span><br><span class="line">          isShow: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          txt: <span class="number">2</span>,</span><br><span class="line">          isShow: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          txt: <span class="number">3</span>,</span><br><span class="line">          isShow: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+<p>这里，预期是页面上只输出 2，来看看结果：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3429a34c-743e-4ef6-a189-04288c5ff288/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200903/us-west-2/s3/aws4_request&X-Amz-Date=20200903T060644Z&X-Amz-Expires=86400&X-Amz-Signature=e441eb0195e58eb17ee77479cf0e7478a1ba360f3c78f2d7ae8ee050dba68f23&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>可以看到，1 和 3 都是先生成，然后被关闭的。</p>
+<p>从结果上看，似乎没什么太大的问题，输出和预期是相符的，但实际上这样的操作实际上是非常消耗性能的。</p>
+<p>为什么这么说呢，我们将 <code>render</code> 函数打印出来看看：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">with</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> _c(</span><br><span class="line">      <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line">      &#123; <span class="attr">attrs</span>: &#123; <span class="attr">id</span>: <span class="string">&#x27;demo&#x27;</span> &#125; &#125;,</span><br><span class="line">      [</span><br><span class="line">        _c(<span class="string">&#x27;h1&#x27;</span>, [_v(<span class="string">&#x27;v-if 和 v-for&#x27;</span>)]),</span><br><span class="line">        _v(<span class="string">&#x27; &#x27;</span>),</span><br><span class="line">        _l(arr, <span class="function"><span class="keyword">function</span> (<span class="params">a</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> a.isShow ? _c(<span class="string">&#x27;p&#x27;</span>, &#123; <span class="attr">key</span>: a.txt &#125;, [_v(<span class="string">&#x27;\n        &#x27;</span> + _s(a.txt) + <span class="string">&#x27;\n      &#x27;</span>)]) : _e()</span><br><span class="line">        &#125;),</span><br><span class="line">      ],</span><br><span class="line">      <span class="number">2</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这里先渲染列表，然后在循环中通过判断 isShow 来是否渲染。什么意思呢，我们来看看上面代码的 dom 结构：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/c7648830-e119-421a-a499-bd87d88d612c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200903/us-west-2/s3/aws4_request&X-Amz-Date=20200903T060735Z&X-Amz-Expires=86400&X-Amz-Signature=622b740416c56587a078782b1e9e1858d5a097ba2458726e773b0edc9168ba69&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>可以看到，1 和 3 实际上是被渲染出来，然后再被关掉的。（这不是多此一举嘛（＝。＝））</p>
+<p>那么应该怎么优化呢？</p>
+<p>这里可以利用 vue 的计算属性将 arr 过滤一遍，将需要渲染的值过滤出来即可：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  showArr() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.arr.filter(<span class="function"><span class="params">a</span> =&gt;</span> a.isShow);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/407f6174-c1b5-4de4-9b3a-e549f210226c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5/20200903/us-west-2/s3/aws4_request&X-Amz-Date=20200903T060749Z&X-Amz-Expires=86400&X-Amz-Signature=7317d85add48c6d16ffa6d1acf8fc1a690ac86f75f1c16f725f33fde0a83e8d9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22"></p>
+<p>dom 结构如下：</p>
+<p><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5b11ec32-890d-475a-ba35-605af1b10634%2FUntitled.png?table=block&id=e04d64f3-2d9a-4542-b652-76b1e045c51c&name=Untitled.png&cache=v2"></p>
+<p>显然，这样处理之后性能肯定是高于上面的方案了。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>更佳阅读体验：<a target="_blank" rel="noopener" href="https://www.notion.so/005-v-for-v-if-4db7ff19833b43cd9cbf268c78516104">005 - v-for 和 v-if 谁的优先级更高</a></p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01-2/">
-      前端面试系列【002】 - 按要求完成 mergePromise 代码
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
               
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01-2/" class="leancloud_visitors" data-flag-title="前端面试系列【002】 - 按要求完成 mergePromise 代码">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
+            </div>
           
         </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
+          
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里是一道与 js 执行流程的代码题，下面来看看题目吧！</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/09/01/2020-09-01/">
-      前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://space.bilibili.com/11282054" rel="nofollow noopener">
-    <img no-lazy src="">
-    <p>初心Yearth</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T14:08:24+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 1, 2020</p>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 3, 2020</p>
   </a>
 </div>
 
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/09/01/2020-09-01/" class="leancloud_visitors" data-flag-title="前端面试系列【001】 - React 高阶组件、Render props 和 hooks 有什么区别，为什么要不断迭代？">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/09/01/2020-09-01/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/09/01/2020-09-01/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>这里有两个问题：</p>
-<ul>
-<li>React 高阶组件、Render props 和 hooks 有什么区别？</li>
-<li>为什么要不断迭代？</li>
-</ul>
-<p>我们先来看第一个问题，而第一个问题，要讲清楚这三者的区别，那自然要明白三者分别是什么。</p>
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
       
     </div>
-    
-      
-        <a class= "readmore" href="/2020/09/01/2020-09-01/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
   </section>
-</article>
 
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/09/02/2020-09-02-2/'>
+                <p class='title'>前端面试系列【004】 - 请描述 XSS 的基本概念，攻击原理和防御措施<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>基本概念先来看看 wiki 的说明吧：
+
+跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注...</p>
+              </a>
+            
           </div>
         
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
+      </section>
+    </article>
   
 
 
-	
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
 </div>
 <aside class='l_side'>
   
@@ -958,27 +504,28 @@
     
     
 
-  
 
-  
-    
-    
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-text">解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-text">扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
